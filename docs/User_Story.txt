@@ -1,0 +1,10 @@
+Karen Volis
+
+Karen needs an application to automate the TA/RA Time card signatures. This
+application will allow workers to come in and sign their time sheets on a
+tablet. At the end of each week, it will send Karen an email with an excel
+sheet of the results for that week. If a person hasn’t come in to sign their
+time card after a week, the app will send an auto email to the TA/RA and Karen
+stating they have not signed yet for that specific week. Also, this app may
+contain frequently asked questions so that students can refer to the app
+rather than having to ask Karen.
