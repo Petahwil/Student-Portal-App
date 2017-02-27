@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("Signature");
 
         //test auto email system
-        MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass6");
+        MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
         Mail.MailBuilder builder = new Mail.MailBuilder();
         Mail mail = builder
                 .setSender("timesheetautoemail@gmail.com")
