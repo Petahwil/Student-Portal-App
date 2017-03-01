@@ -11,13 +11,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.dpivonka.timesheet.MainActivity">
 
-<<<<<<< HEAD
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_above="@+id/buttonLayout">
-=======
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,13 +25,11 @@
         android:layout_marginTop="11dp"
         android:layout_below="@+id/nameText"
         android:layout_centerHorizontal="true" />
->>>>>>> dbbe6aac3bdfa7c04e068e9330e06da958c50f3e
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-<<<<<<< HEAD
         android:hint="Name"
         android:ems="10"
         android:id="@+id/editText"
@@ -76,7 +73,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/editText"
         android:layout_alignEnd="@+id/editText"
-
         android:layout_gravity="left|center"
         android:layout_weight="1"/>
 
@@ -92,15 +88,4 @@
         android:layout_weight="1"/>
 </LinearLayout>
 
-
-
-
-=======
-        android:ems="10"
-        android:id="@+id/nameText"
-        android:layout_marginTop="33dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        tools:text="Name" />
->>>>>>> dbbe6aac3bdfa7c04e068e9330e06da958c50f3e
 </RelativeLayout>

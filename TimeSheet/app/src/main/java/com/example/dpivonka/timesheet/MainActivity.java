@@ -1,6 +1,7 @@
 package com.example.dpivonka.timesheet;
 
-<<<<<<< HEAD
+import android.widget.EditText;
+
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
-=======
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -28,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
->>>>>>> dbbe6aac3bdfa7c04e068e9330e06da958c50f3e
+
 
 import it.enricocandino.androidmail.MailSender;
 import it.enricocandino.androidmail.model.Mail;

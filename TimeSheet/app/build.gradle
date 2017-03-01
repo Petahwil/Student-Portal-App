@@ -26,12 +26,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.1'
     testCompile 'junit:junit:4.12'
     compile project(':libraries:library')
-<<<<<<< HEAD
+
     compile 'com.github.gcacace:signature-pad:1.2.1'
-=======
+
     //Firebase
     compile 'com.google.firebase:firebase-database:10.2.0'
     compile 'com.google.firebase:firebase-storage:10.2.0'
->>>>>>> dbbe6aac3bdfa7c04e068e9330e06da958c50f3e
 }
 apply plugin: 'com.google.gms.google-services'
