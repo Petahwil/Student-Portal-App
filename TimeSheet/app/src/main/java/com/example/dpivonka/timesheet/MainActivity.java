@@ -1,5 +1,8 @@
 package com.example.dpivonka.timesheet;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import it.enricocandino.androidmail.MailSender;
@@ -33,16 +37,21 @@ public class MainActivity extends AppCompatActivity {
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("Signature");
 
-        //test auto email system
-        MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
-        Mail.MailBuilder builder = new Mail.MailBuilder();
-        Mail mail = builder
-                .setSender("timesheetautoemail@gmail.com")
-                .addRecipient(new Recipient("dpivonka@comcast.net"))
-                .setText("Hello")
-                .build();
 
-        mailSender.sendMail(mail);
+        //weekly email system
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
+        calendar.set(Calendar.HOUR_OF_DAY,18);
+        Intent intent = new Intent(getApplicationContext(),Notification_reciver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
+
+
+
+
+
+
         // Enable Send button when there's text to send
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
