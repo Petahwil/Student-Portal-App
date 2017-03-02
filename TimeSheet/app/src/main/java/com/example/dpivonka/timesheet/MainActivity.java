@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText mNameEditText;
     private DatabaseReference mMessagesDatabaseReference;
     private Button mSendButton;
+    private Button mClearButton;
+    private SignaturePad mSignaturePad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +63,7 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
 
 
-
-
-
-
-        // Enable Send button when there's text to send
+        /*// Enable Send button when there's text to send
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
             }
-        });
+        });*/
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SignaturePad mSignaturePad;
         mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
@@ -116,15 +113,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button button = (Button) findViewById(R.id.button);
-
-        //if button is clicked
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        mClearButton = (Button) findViewById(R.id.clear_button);
+        mClearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSignaturePad.clear();
                 Toast.makeText(getApplicationContext(),
-                        "Signature has been submitted.", Toast.LENGTH_LONG).show();
+                        "Signature has been cleared.", Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
 
