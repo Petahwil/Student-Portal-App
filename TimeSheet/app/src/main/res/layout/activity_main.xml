@@ -9,31 +9,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.dpivonka.timesheet.MainActivity">
+    tools:context="com.example.dpivonka.timesheet.MainActivity">1q
 
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_above="@+id/buttonLayout">
-
-    <com.github.gcacace.signaturepad.views.SignaturePad
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/signature_pad"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/border"
-        app:penColor="@android:color/black"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="right|top"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/linearLayout"
-        android:layout_below="@+id/editText"
-
-        />
 
     <EditText
         android:layout_width="fill_parent"
@@ -45,6 +27,24 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <com.github.gcacace.signaturepad.views.SignaturePad
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/signature_pad"
+        android:layout_width="match_parent"
+        android:layout_height="197dp"
+        android:background="@drawable/border"
+        app:penColor="@android:color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="right|top"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/linearLayout"
+        android:layout_below="@+id/editText"
+
+        />
 
 </LinearLayout>
 
