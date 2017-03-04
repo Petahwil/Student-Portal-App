@@ -2,10 +2,10 @@
 
 https://github.com/enrichman/androidmail Auto Email Libray Used
 
-Brianne - App UI
+Brianne - Signature Box
 
-Sam - Desktop App UI
+Sam - listview
 
-Dan - Email system
+Dan - Weekly alarmmanager
 
-Peter - Firebase setup
+Peter - adding TA to firebase
