@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 userList.clear();
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    User university = postSnapshot.getValue(User.class);
-                    userList.add(university);
+                    User user = postSnapshot.getValue(User.class);
+                    userList.add(user);
                 }
             }
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
                 // Clear input box
                 mNameEditText.setText("");
             }
