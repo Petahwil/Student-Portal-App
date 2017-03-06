@@ -1,5 +1,7 @@
 package com.example.dpivonka.timesheet;
 
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import android.os.Bundle;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mSendButton;
     private Button mClearButton;
     private SignaturePad mSignaturePad;
+    private AutoCompleteTextView actv;
 
 
     private void writeNewUser(String userId, String name, String email) {
@@ -69,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
 
+        actv = (AutoCompleteTextView) findViewById(R.id.editText);
+        String[] database_names = getResources().getStringArray(R.array.name_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.simple_list_item_1,database_names);
+        actv.setAdapter(adapter);
 
         // Enable Send button when there's text to send
         mNameEditText.addTextChangedListener(new TextWatcher() {
