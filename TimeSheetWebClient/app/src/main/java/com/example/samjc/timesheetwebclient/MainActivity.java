@@ -5,9 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final ListView lvMain = (ListView) findViewById(R.id.lv_main);
-
+        myRef.setValue("Hello, World!");
         ArrayList<Person> fakePeople = new ArrayList<Person>();
         fakePeople.add(new Person("Person1", "email1@domain.com"));
         fakePeople.add(new Person("Person2", "email2@domain.com"));
