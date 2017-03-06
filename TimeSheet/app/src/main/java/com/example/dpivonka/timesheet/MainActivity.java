@@ -25,12 +25,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 
 import it.enricocandino.androidmail.MailSender;
@@ -46,13 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private SignaturePad mSignaturePad;
     private AutoCompleteTextView actv;
 
-
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
-
-        mEmployeeDatabaseReference.push().setValue(user);
-    }
-
+    private List<User> userList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +60,23 @@ public class MainActivity extends AppCompatActivity {
         mNameEditText = (EditText)findViewById(R.id.editText);
         mSendButton = (Button) findViewById(R.id.sigButton);
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
+
+
+        //get users data everytime it changes
+        mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot snapshot) {
+                userList.clear();
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    User user = postSnapshot.getValue(User.class);
+                    userList.add(user);
+                }
+            }
+
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+
 
         //weekly email system
         Calendar calendar = Calendar.getInstance();
@@ -101,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Send messages on click to DB
-                writeNewUser("3", mNameEditText.getText().toString(), "Danp@gmail.com");
+
                 // Clear input box
                 mNameEditText.setText("");
             }
