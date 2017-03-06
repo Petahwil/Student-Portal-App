@@ -7,27 +7,25 @@ package com.example.samjc.timesheetwebclient;
 public class Person {
     private String name;
     private String email;
-    private Position position;
-    private String faculty;
 
-    Person(String name, String email, Position position, String faculty) {
+    Person(String name, String email) {
         this.name = name;
         this.email = email;
-        this.position = position;
-        this.faculty = faculty;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-    public String getName() { return name; }
 
-    public void setEmail(String email) { this.email = email; }
-    public String getEmail() { return email; }
+    public String getName() {
+        return name;
+    }
 
-    public void setPosition(Position position) { this.position = position; }
-    public Position getPosition() { return position; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setFaculty(String faculty) { this.faculty = faculty; }
-    public String getFaculty() { return faculty; }
+    public String getEmail() {
+        return email;
+    }
 }
