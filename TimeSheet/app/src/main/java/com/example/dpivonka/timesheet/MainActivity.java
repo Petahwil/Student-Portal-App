@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private SignaturePad mSignaturePad;
     private AutoCompleteTextView actv;
 
-    private List<User> userList = new ArrayList<>();
+    private ArrayList<User> userList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         mSendButton = (Button) findViewById(R.id.sigButton);
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
 
-
         //get users data everytime it changes
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     userList.add(user);
                 }
             }
-
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
@@ -80,12 +78,18 @@ public class MainActivity extends AppCompatActivity {
 
         //weekly email system
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
-        calendar.set(Calendar.HOUR_OF_DAY,18);
+        //calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
+        //calendar.set(Calendar.HOUR_OF_DAY,18);
+        ///calendar.set(Calendar.DAY_OF_WEEK,Calendar.);
+        calendar.set(Calendar.HOUR_OF_DAY,12);
         Intent intent = new Intent(getApplicationContext(),Notification_reciver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+
+
 
         actv = (AutoCompleteTextView) findViewById(R.id.editText);
         String[] database_names = getResources().getStringArray(R.array.name_array);
@@ -155,3 +159,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+

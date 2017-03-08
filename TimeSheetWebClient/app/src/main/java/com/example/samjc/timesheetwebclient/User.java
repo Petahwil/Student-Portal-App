@@ -15,7 +15,7 @@ public class User {
     }
 
     public User(String username, String email) {
-        signed = false;
+        signed = true;
         this.username = username;
         this.email = email;
     }
