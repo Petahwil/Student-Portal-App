@@ -1,6 +1,7 @@
 package com.example.samjc.timesheetwebclient;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import java.util.Calendar;
 
 public class UserAdapter extends ArrayAdapter<User>{
 
-    public UserAdapter(Context context, ArrayList<User> items) {
+    public UserAdapter(MainActivity context, ArrayList<User> items) {
         super(context, 0, items);
     }
 
