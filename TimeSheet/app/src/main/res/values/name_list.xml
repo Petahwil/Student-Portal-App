@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_prompt">Begin typing your name</string>
+    <string-array name="name_array">
+        <item>Brianne Bindas</item>
+        <item>Samuel Chambers</item>
+        <item>Daniel Pivonka</item>
+        <item>Peter Wilson</item>
+        <item>Samuel Chambers</item>
+        <item>Guanling Chen</item>
+    </string-array>
+</resources>

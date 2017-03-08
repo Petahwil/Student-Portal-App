@@ -1,5 +1,7 @@
 package com.example.dpivonka.timesheet;
 
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
 import android.os.Bundle;
@@ -23,12 +25,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 
 import it.enricocandino.androidmail.MailSender;
@@ -42,14 +48,9 @@ public class MainActivity extends AppCompatActivity {
     private Button mSendButton;
     private Button mClearButton;
     private SignaturePad mSignaturePad;
+    private AutoCompleteTextView actv;
 
-
-    private void writeNewUser(String userId, String name, String email) {
-        User user = new User(name, email);
-
-        mEmployeeDatabaseReference.push().setValue(user);
-    }
-
+    private ArrayList<User> userList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +61,41 @@ public class MainActivity extends AppCompatActivity {
         mSendButton = (Button) findViewById(R.id.sigButton);
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
 
+        //get users data everytime it changes
+        mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot snapshot) {
+                userList.clear();
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    User user = postSnapshot.getValue(User.class);
+                    userList.add(user);
+                }
+            }
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+
+
         //weekly email system
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
-        calendar.set(Calendar.HOUR_OF_DAY,18);
+        //calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
+        //calendar.set(Calendar.HOUR_OF_DAY,18);
+        ///calendar.set(Calendar.DAY_OF_WEEK,Calendar.);
+        calendar.set(Calendar.HOUR_OF_DAY,12);
         Intent intent = new Intent(getApplicationContext(),Notification_reciver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 
+
+
+
+        actv = (AutoCompleteTextView) findViewById(R.id.editText);
+        String[] database_names = getResources().getStringArray(R.array.name_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.simple_list_item_1,database_names);
+        actv.setAdapter(adapter);
 
         // Enable Send button when there's text to send
         mNameEditText.addTextChangedListener(new TextWatcher() {
@@ -93,8 +120,7 @@ public class MainActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Send messages on click to DB
-                writeNewUser("3", mNameEditText.getText().toString(), "Danp@gmail.com");
+
                 // Clear input box
                 mNameEditText.setText("");
             }
@@ -133,3 +159,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+

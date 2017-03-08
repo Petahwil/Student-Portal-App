@@ -11,7 +11,7 @@ public class AddUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_person);
+        setContentView(R.layout.activity_add_user);
 
         final EditText nameEdit = (EditText) findViewById(R.id.name_edit);
         final EditText emailEdit = (EditText) findViewById(R.id.email_edit);

@@ -15,23 +15,28 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
-
-    private void writeNewUser(String userId, String name, String email) {
+    //firebase
+    private FirebaseDatabase mFirebaseDatabase;
+    //firebase
+    private DatabaseReference mEmployeeDatabaseReference;
+    //firebase
+    private void writeNewUser(String name, String email) {
         User user = new User(name, email);
 
-        myRef.push().setValue(user);
+        mEmployeeDatabaseReference.push().setValue(user);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //firebase
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        //firebase
+        mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
 
         final ListView lvMain = (ListView) findViewById(R.id.lv_main);
 
-        myRef.setValue("Hello, World!");
         ArrayList<User> fakePeople = new ArrayList<User>();
         fakePeople.add(new User("User1", "email1@domain.com"));
         fakePeople.add(new User("User7", "email2@domain.com"));
@@ -43,9 +48,10 @@ public class MainActivity extends AppCompatActivity {
                 return o1.username.compareTo(o2.username);
             }
         });
-
         UserAdapter adapter = new UserAdapter(this, fakePeople);
         lvMain.setAdapter(adapter);
+        //firebase
+        writeNewUser("user name" , "email");
     }
 
     @Override
