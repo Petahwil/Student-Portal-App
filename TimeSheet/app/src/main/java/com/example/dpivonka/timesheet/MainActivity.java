@@ -38,20 +38,27 @@ import it.enricocandino.androidmail.model.Recipient;
 public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private EditText mNameEditText;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mEmployeeDatabaseReference;
     private Button mSendButton;
     private Button mClearButton;
     private SignaturePad mSignaturePad;
+
+
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
+
+        mEmployeeDatabaseReference.push().setValue(user);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mNameEditText = (EditText)findViewById(R.id.nameText);
+        mNameEditText = (EditText)findViewById(R.id.editText);
         mSendButton = (Button) findViewById(R.id.sigButton);
-        List<FriendlyMessage> friendlyMessages = new ArrayList<>();
-        mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("Signature");
-
+        mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
 
         //weekly email system
         Calendar calendar = Calendar.getInstance();
@@ -63,15 +70,14 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
 
 
-        /*// Enable Send button when there's text to send
+        // Enable Send button when there's text to send
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, i
-            nt i2) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().trim().length() > 0) {
                     mSendButton.setEnabled(true);
                 } else {
@@ -82,14 +88,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
             }
-        });*/
+        });
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Send messages on click to DB
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mNameEditText.getText().toString());
-                mMessagesDatabaseReference.push().setValue(friendlyMessage);
+                writeNewUser("3", mNameEditText.getText().toString(), "Danp@gmail.com");
                 // Clear input box
                 mNameEditText.setText("");
             }

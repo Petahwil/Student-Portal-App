@@ -7,11 +7,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
+
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
+
+        myRef.push().setValue(user);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView lvMain = (ListView) findViewById(R.id.lv_main);
 
+        myRef.setValue("Hello, World!");
         ArrayList<User> fakePeople = new ArrayList<User>();
-        fakePeople.add(new User("UserA", "email1@domain.com"));
-        fakePeople.add(new User("UserG", "email2@domain.com"));
-        fakePeople.add(new User("UserE", "email3@domain.com"));
+        fakePeople.add(new User("User1", "email1@domain.com"));
+        fakePeople.add(new User("User7", "email2@domain.com"));
+        fakePeople.add(new User("User3", "email3@domain.com"));
 
         Collections.sort(fakePeople, new Comparator<User>() {
             @Override
@@ -46,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                startActivity(new Intent(this, AddNewUserActivity.class));
+                startActivity(new Intent(this, AddUserActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
