@@ -66,17 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
                     userList.add(user);
+                    adapter.notifyDataSetChanged();
                 }
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-
-        //temporary users for use before Firebase is fully functional.
-        userList.add(new User("User1", "email1@domain.com"));
-        userList.add(new User("User7", "email2@domain.com"));
-        userList.add(new User("User3", "email3@domain.com"));
+        
 
         //sort users alphabetically by name.
         Collections.sort(userList, new Comparator<User>() {
