@@ -24,32 +24,42 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
-    //firebase
+
+    //region MEMBER VARIABLES
+    //region FIREBASE
+    /**
+     * The {@link FirebaseDatabase} holding the Firebase database.
+     */
     private FirebaseDatabase mFirebaseDatabase;
-    //firebase
+    /**
+     * The {@link DatabaseReference} to the employees in the Firebase database.
+     */
     private DatabaseReference mEmployeeDatabaseReference;
-    //firebase
-    private void writeNewUser(String name, String email) {
-        User user = new User(name, email);
-
-        mEmployeeDatabaseReference.push().setValue(user);
-    }
+    //endregion
+    /**
+     * The {@link ArrayList<User>} that holds all users in database.
+     */
     private ArrayList<User> userList = new ArrayList<>();
+    /**
+     * The {@link ListView} that displays all of the users.
+     */
     private ListView lvMain;
+    /**
+     * The {@link UserAdapter} that will populate the {@link ListView} with the users in userList.
+     */
     private UserAdapter adapter;
-
+    //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //firebase
+
+        //set up Firebase properties.
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        //firebase
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
 
-
-        //get users data everytime it changes
+        //read list of users into userList every time the database is updated.
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
                 userList.clear();
@@ -63,39 +73,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final ArrayList<User> fakePeople = new ArrayList<User>();
-        fakePeople.add(new User("User1", "email1@domain.com"));
-        fakePeople.add(new User("User7", "email2@domain.com"));
-        fakePeople.add(new User("User3", "email3@domain.com"));
+        //temporary users for use before Firebase is fully functional.
+        userList.add(new User("User1", "email1@domain.com"));
+        userList.add(new User("User7", "email2@domain.com"));
+        userList.add(new User("User3", "email3@domain.com"));
 
-        Collections.sort(fakePeople, new Comparator<User>() {
+        //sort users alphabetically by name.
+        Collections.sort(userList, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
                 return o1.username.compareTo(o2.username);
             }
         });
         lvMain = (ListView) findViewById(R.id.lv_main);
-        adapter = new UserAdapter(this, fakePeople);
+        adapter = new UserAdapter(this, userList);
         lvMain.setAdapter(adapter);
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final User user = (User) lvMain.getItemAtPosition(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Delete user: \"" + user.username + "\" from database?");
+                builder.setTitle("Delete user \"" + user.username + "\" from database?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //delete user from database
-                        adapter = new UserAdapter(MainActivity.this, fakePeople);
-                        lvMain.setAdapter(adapter);
-                        Toast.makeText(getApplicationContext(), "User: \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG).show();
+
+                        //reset adapter and apply to lvMain to update list.
+                        adapter.notifyDataSetChanged();
+                        //adapter = new UserAdapter(MainActivity.this, userList);
+                        //lvMain.setAdapter(adapter);
+                        Toast.makeText(getApplicationContext(), "User \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //do nothing.
                         dialog.dismiss();
                     }
                 });
@@ -103,10 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-
-
-        //firebase
-        writeNewUser("user name" , "email");
     }
 
     @Override

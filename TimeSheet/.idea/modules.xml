@@ -3,12 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TimeSheet.iml" filepath="$PROJECT_DIR$/TimeSheet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TimeSheet.iml" filepath="$PROJECT_DIR$/TimeSheet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libraries/library/library.iml" filepath="$PROJECT_DIR$/libraries/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/library/library.iml" filepath="$PROJECT_DIR$/libraries/library/library.iml" />
     </modules>
   </component>
