@@ -14,15 +14,19 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.enricocandino.androidmail.MailSender;
 import it.enricocandino.androidmail.model.Mail;
@@ -182,6 +186,15 @@ public class MainActivity extends AppCompatActivity {
                 .setText("testing auto email system\n\n"+email)
                 .build();
         mailSender.sendMail(mail);
+
+        //reset all signed values for this week now that the email has sent
+        mEmployeeDatabaseReference.removeValue();
+        mEmployeeDatabaseReference.setValue("employees");
+        mEmployeeDatabaseReference.child("employees");
+        for (User user : userList) {
+            user.signed=false;
+            mEmployeeDatabaseReference.push().setValue(user);
+        }
 
         Toast.makeText(getApplicationContext(),
                 "Email Sent", Toast.LENGTH_SHORT).show();

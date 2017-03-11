@@ -5,8 +5,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.enricocandino.androidmail.MailSender;
 import it.enricocandino.androidmail.model.Mail;
@@ -68,6 +73,18 @@ public class EmailSystem {
                 .setText("testing auto email system\n\n"+email)
                 .build();
         mailSender.sendMail(mail);
+
+        //reset all signed values for this week now that the email has sent
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
+        mEmployeeDatabaseReference.removeValue();
+        mEmployeeDatabaseReference.setValue("employees");
+        mEmployeeDatabaseReference.child("employees");
+        for (User user : userList) {
+            user.signed=false;
+            mEmployeeDatabaseReference.push().setValue(user);
+        }
+
     }
 
     static void EmailReminder(ArrayList<User> userList){

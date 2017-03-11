@@ -54,6 +54,15 @@ public class AlarmReceiver extends BroadcastReceiver{
             case Calendar.THURSDAY:
                     EmailSystem.EmailReminder(userList);
                 break;
+
+            case Calendar.SATURDAY:
+                EmailSystem.EmailAdmin(userList);
+                EmailSystem.EmailReminder(userList);
+                break;
+            case Calendar.SUNDAY:
+                EmailSystem.EmailAdmin(userList);
+                EmailSystem.EmailReminder(userList);
+                break;
             default:
                 //No task scheduled for this day
         }
