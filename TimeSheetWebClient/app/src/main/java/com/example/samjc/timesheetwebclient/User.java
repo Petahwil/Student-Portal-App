@@ -6,14 +6,30 @@ package com.example.samjc.timesheetwebclient;
 
 public class User {
 
+    /**
+     * The {@link String} holding the name of the employee.
+     */
     public String username;
+    /**
+     * The {@link String} holding the email address of the employee.
+     */
     public String email;
+    /**
+     * The {@link Boolean} determining whether or not the employee has entered his/her hours for the week.
+     */
     public boolean signed;
 
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
 
+    /**
+     * Default constructor required for calls to DataSnapshot.getValue(User.class)
+     */
+    public User() {}
+
+    /**
+     * Constructor for {@link User} class.
+     * @param username The {@link String} used to initiate the "username" member variable of the {@link User} class.
+     * @param email The {@link String} used to initiate the "email" member variable of the {@link User} class.
+     */
     public User(String username, String email) {
         signed = false;
         this.username = username;
