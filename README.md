@@ -1,11 +1,12 @@
 # Student-Portal-App
 
 https://github.com/enrichman/androidmail Auto Email Libray Used
+https://github.com/kcochibili/TinyDB--Android-Shared-Preferences-Turbo Tiny Database
 
-Brianne - auto complete names from database
+Brianne - 
 
-Sam - add ta activity / web app ui
+Sam - 
 
-Dan - pulling from firbase / email system parses signed and not signed
+Dan - email system improvments, weekly reminder, force email sending thru client app
 
-Peter - intgrate adding ta to web app / general firbase setup
+Peter - 
