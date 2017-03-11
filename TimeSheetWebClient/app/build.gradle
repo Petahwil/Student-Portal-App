@@ -28,6 +28,7 @@ dependencies {
     compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.android.support.constraint:constraint-layout:+'
     testCompile 'junit:junit:4.12'
+    compile 'it.enricocandino:androidmail:1.0.0-SNAPSHOT'
 }
 
 

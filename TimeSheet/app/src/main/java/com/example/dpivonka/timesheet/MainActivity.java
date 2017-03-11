@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
 import android.app.AlarmManager;
@@ -21,9 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,13 +32,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
 
+import java.util.concurrent.TimeUnit;
 
-import it.enricocandino.androidmail.MailSender;
-import it.enricocandino.androidmail.model.Mail;
-import it.enricocandino.androidmail.model.Recipient;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
@@ -56,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mNameEditText = (EditText)findViewById(R.id.editText);
-        mSendButton = (Button) findViewById(R.id.sigButton);
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
+
+        final TinyDB tinydb = new TinyDB(getApplicationContext());
 
         //get users data everytime it changes
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -69,30 +65,25 @@ public class MainActivity extends AppCompatActivity {
                     User user = postSnapshot.getValue(User.class);
                     userList.add(user);
                 }
+                tinydb.putListObject("MyUsers", userList);
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
 
-
         //weekly email system
-        Calendar calendar = Calendar.getInstance();
-        //calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
-        //calendar.set(Calendar.HOUR_OF_DAY,18);
-        ///calendar.set(Calendar.DAY_OF_WEEK,Calendar.);
-        calendar.set(Calendar.HOUR_OF_DAY,12);
-        Intent intent = new Intent(getApplicationContext(),Notification_reciver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY*7, pendingIntent);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        EmailSystem.SetAlarm(getApplicationContext());
 
 
 
-
+        mNameEditText = (EditText)findViewById(R.id.editText);
+        mSendButton = (Button) findViewById(R.id.sigButton);
+        mClearButton = (Button) findViewById(R.id.clear_button);
+        mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);
         actv = (AutoCompleteTextView) findViewById(R.id.editText);
         String[] database_names = getResources().getStringArray(R.array.name_array);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.simple_list_item_1,database_names);
         actv.setAdapter(adapter);
@@ -100,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
         // Enable Send button when there's text to send
         mNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().trim().length() > 0) {
@@ -111,41 +100,27 @@ public class MainActivity extends AppCompatActivity {
                     mSendButton.setEnabled(false);
                 }
             }
-
             @Override
-            public void afterTextChanged(Editable editable) {
-            }
+            public void afterTextChanged(Editable editable) {}
         });
         // Send button sends a message and clears the EditText
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // Clear input box
                 mNameEditText.setText("");
             }
         });
 
-        mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
-
             @Override
-            public void onStartSigning() {
-                //Event triggered when the pad is touched
-            }
-
+            public void onStartSigning() {}
             @Override
-            public void onSigned() {
-                //Event triggered when the pad is signed
-            }
-
+            public void onSigned() {}
             @Override
-            public void onClear() {
-                //Event triggered when the pad is cleared
-            }
+            public void onClear() {}
         });
 
-        mClearButton = (Button) findViewById(R.id.clear_button);
         mClearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 }
 
 

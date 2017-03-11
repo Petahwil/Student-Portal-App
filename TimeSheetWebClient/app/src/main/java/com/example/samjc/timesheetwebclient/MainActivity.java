@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import it.enricocandino.androidmail.MailSender;
+import it.enricocandino.androidmail.model.Mail;
+import it.enricocandino.androidmail.model.Recipient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-        
+
 
         //sort users alphabetically by name.
         Collections.sort(userList, new Comparator<User>() {
@@ -115,6 +120,14 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         });
+
+        Button send = (Button) findViewById(R.id.sendmail);
+        send.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EmailAdmin(userList);
+            }
+        });
+
     }
 
     @Override
@@ -131,5 +144,46 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    void EmailAdmin(ArrayList<User> userList){
+        ArrayList<String> signed = new ArrayList<>();
+        ArrayList<String> notsigned = new ArrayList<>();
+
+        for (User user : userList) {
+            if(user.signed==true){
+                signed.add(user.getUsername());
+            }else{//false
+                notsigned.add(user.getUsername());
+            }
+        }
+
+        String email = new String();
+
+        email = "Not Signed\n\n";
+
+
+        for (String s : notsigned) {
+            email += s+"\n";
+        }
+
+        email += "\n\nSigned\n\n";
+
+        for (String s : signed) {
+            email += s+"\n";
+        }
+
+        MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
+        Mail.MailBuilder builder = new Mail.MailBuilder();
+        Mail mail = builder
+                .setSender("timesheetautoemail@gmail.com")
+                .addRecipient(new Recipient("dpivonka@comcast.net"))
+                .setSubject("Weekly Signatures")
+                .setText("testing auto email system\n\n"+email)
+                .build();
+        mailSender.sendMail(mail);
+
+        Toast.makeText(getApplicationContext(),
+                "Email Sent", Toast.LENGTH_SHORT).show();
     }
 }

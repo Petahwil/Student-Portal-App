@@ -4,7 +4,7 @@ package com.example.dpivonka.timesheet;
  * Created by wilsop4 on 3/3/2017.
  */
 
-public class User {
+public class User extends Object{
 
     public String username;
     public String email;
