@@ -15,40 +15,66 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_above="@+id/buttonLayout"
     android:weightSum="4"
-    android:layout_above="@+id/buttonLayout">
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true">
 
     <AutoCompleteTextView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:inputType="textPersonName"
-        android:hint="Name"
+        android:hint="Begin typing your name here..."
         android:id="@+id/editText"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ems="10" />
 
-    <com.github.gcacace.signaturepad.views.SignaturePad
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/signature_pad"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="197dp"
-        android:background="@drawable/border"
-        app:penColor="@android:color/black"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="right|top"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="3"
-        android:layout_above="@+id/linearLayout"
-        android:layout_below="@+id/editText"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/buttonLayout"
+        android:id="@+id/signature_pad_container">
 
-        />
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/frameLayout" />
+
+        <TextView
+            android:id="@+id/signature_pad_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:text="@string/agreement"
+            android:layout_below="@+id/frameLayout"
+            android:layout_centerHorizontal="true" />
+
+        <com.github.gcacace.signaturepad.views.SignaturePad
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signature_pad"
+            android:layout_width="fill_parent"
+            android:layout_height="197dp"
+            android:background="@drawable/border"
+            app:penColor="@android:color/black"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="right|top"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="3"
+
+            />
+    </RelativeLayout>
 
 </LinearLayout>
 
@@ -71,7 +97,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/editText"
         android:layout_alignEnd="@+id/editText"
-        android:layout_gravity="left|center"
+        android:layout_gravity="left"
         android:layout_weight="1"/>
 
     <Button
@@ -83,7 +109,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_gravity="right|center"
+        android:layout_gravity="right"
         android:layout_weight="1"/>
 </LinearLayout>
 

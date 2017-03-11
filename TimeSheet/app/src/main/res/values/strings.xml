@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TimeSheet</string>
+    <string name="agreement">You agree to working your assigned hours for the week.</string>
 </resources>

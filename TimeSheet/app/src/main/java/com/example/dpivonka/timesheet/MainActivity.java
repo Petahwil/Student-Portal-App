@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView actv;
 
     private ArrayList<User> userList = new ArrayList<>();
+    private ArrayList<String> userNames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
                     userList.add(user);
+                    userNames.add(user.getUsername());
                 }
             }
             public void onCancelled(DatabaseError databaseError) {
@@ -75,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        System.out.println("\n\n\n\n" + userNames.size() +"\n\n\n\n\n");
+        //System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n");
+        for (int i = 0; i < userNames.size(); i++) {
+            if (userNames.size() == 0) {
+                System.out.println("\n\n\nThis never got filled!!!!!! \n\n\n");
+            }
+
+        }
 
         //weekly email system
         Calendar calendar = Calendar.getInstance();
@@ -90,6 +100,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, userNames);
+        AutoCompleteTextView textView = (AutoCompleteTextView)
+                findViewById(R.id.editText);
+        textView.setAdapter(adapter);*/
 
         actv = (AutoCompleteTextView) findViewById(R.id.editText);
         String[] database_names = getResources().getStringArray(R.array.name_array);
