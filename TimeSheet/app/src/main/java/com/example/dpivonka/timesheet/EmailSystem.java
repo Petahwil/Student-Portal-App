@@ -49,7 +49,7 @@ public class EmailSystem {
         email = "Not Signed\n\n";
 
 
-        for (String s : notsignedsigned) {
+        for (String s : notsigned) {
             email += s+"\n";
         }
 
