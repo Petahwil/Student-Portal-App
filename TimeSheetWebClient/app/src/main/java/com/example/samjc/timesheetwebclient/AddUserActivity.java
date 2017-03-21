@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,10 +36,10 @@ public class AddUserActivity extends AppCompatActivity {
      * The {@link EditText} where user enters email address of the new user.
      */
     EditText emailEdit;
-    /**
-     * The {@link Button} that user presses to save the new user to the database.
-     */
-    Button saveButton;
+//    /**
+//     * The {@link Button} that user presses to save the new user to the database.
+//     */
+//    Button saveButton;
     //endregion
     //endregion
 
@@ -53,11 +55,42 @@ public class AddUserActivity extends AppCompatActivity {
         //set up UI Element fields
         nameEdit = (EditText) findViewById(R.id.name_edit);
         emailEdit = (EditText) findViewById(R.id.email_edit);
-        saveButton = (Button) findViewById(R.id.save_button);
+//        saveButton = (Button) findViewById(R.id.save_button);
 
-        //handle event where saveButton is pressed.
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+//        //handle event where saveButton is pressed.
+//        saveButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                //get name and email from text fields in activity.
+//                String name = nameEdit.getText().toString();
+//                String email = emailEdit.getText().toString();
+//
+//                if (TextUtils.isEmpty(name)) {
+//                    //if name field is empty make Toast to inform user.
+//                    Toast.makeText(getApplicationContext(), "Empty \"Name\" field.", Toast.LENGTH_LONG).show();
+//                } else if ((TextUtils.isEmpty(email)) ||
+//                        !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                    //else if email is invalid or empty make Toast to inform user.
+//                    Toast.makeText(getApplicationContext(), "Invalid or empty \"Email Address\" field.", Toast.LENGTH_LONG).show();
+//                } else {
+//                    //else add user to database and go back to MainActivity.
+//                    writeNewUser(name, email);
+//                    Toast.makeText(getApplicationContext(), "User \"" + name + "\" added to database.", Toast.LENGTH_LONG).show();
+//                    startActivity(new Intent(AddUserActivity.this, MainActivity.class));
+//                }
+//            }
+//        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add_user, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
                 //get name and email from text fields in activity.
                 String name = nameEdit.getText().toString();
                 String email = emailEdit.getText().toString();
@@ -75,10 +108,10 @@ public class AddUserActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "User \"" + name + "\" added to database.", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(AddUserActivity.this, MainActivity.class));
                 }
-            }
-        });
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
-
 
     //region HELPER FUNCTIONS
     /**

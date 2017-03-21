@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
                     userList.add(user);
+                    sortUsers();
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -83,14 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        //sort users alphabetically by name.
-        Collections.sort(userList, new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return o1.username.compareTo(o2.username);
-            }
-        });
         lvMain = (ListView) findViewById(R.id.lv_main);
         adapter = new UserAdapter(this, userList);
         lvMain.setAdapter(adapter);
@@ -125,14 +118,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button send = (Button) findViewById(R.id.sendmail);
-        send.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                EmailAdmin(userList);
-            }
-        });
-
     }
+
+    //region MENU FUNCTIONS
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -146,26 +134,48 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_add:
                 startActivity(new Intent(this, AddUserActivity.class));
                 return true;
+            case R.id.action_email:
+                EmailAdmin();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    void EmailAdmin(ArrayList<User> userList){
+    //endregion
+
+    //region HELPER FUNCTIONS
+
+    /**
+     * Sorts users in {@link ArrayList<User>} userList alphabetically.
+     */
+    private void sortUsers() {
+        Collections.sort(userList, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.username.compareTo(o2.username);
+            }
+        });
+    }
+
+    /**
+     * Sends email to admin showing which users have signed in for the
+     * week and which users have not.
+     */
+    private void EmailAdmin(){
         ArrayList<String> signed = new ArrayList<>();
         ArrayList<String> notsigned = new ArrayList<>();
 
+        //filter users who signed from users who didn't.
         for (User user : userList) {
-            if(user.signed==true){
+            if(user.signed){
                 signed.add(user.getUsername());
-            }else{//false
+            }else{
                 notsigned.add(user.getUsername());
             }
         }
 
-        String email = new String();
-
-        email = "Not Signed\n\n";
-
+        //create and populate body of email.
+        String email = "Not Signed\n\n";
 
         for (String s : notsigned) {
             email += s+"\n";
@@ -177,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
             email += s+"\n";
         }
 
+        //build and send email.
         MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
         Mail.MailBuilder builder = new Mail.MailBuilder();
         Mail mail = builder
@@ -187,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mailSender.sendMail(mail);
 
-        //reset all signed values for this week now that the email has sent
+        //reset all signed values for this week now that the email has sent.
         mEmployeeDatabaseReference.removeValue();
         mEmployeeDatabaseReference.setValue("employees");
         mEmployeeDatabaseReference.child("employees");
@@ -199,4 +210,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),
                 "Email Sent", Toast.LENGTH_SHORT).show();
     }
+
+    //endregion
 }

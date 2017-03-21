@@ -4,4 +4,6 @@
     <string name="name">Name:</string>
     <string name="email_address">Email Address:</string>
     <string name="save">Save</string>
+    <string name="send_email">Send Email</string>
+    <string name="app_title">TA/RA Time Sheet</string>
 </resources>

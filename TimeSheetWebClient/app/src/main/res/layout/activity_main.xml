@@ -20,11 +20,11 @@
 
     </ListView>
 
-    <Button
-        android:id="@+id/sendmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send Email"
-        android:layout_weight=".15"/>
+    <!--<Button-->
+        <!--android:id="@+id/sendmail"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Send Email"-->
+        <!--android:layout_weight=".15"/>-->
 
 </LinearLayout>
