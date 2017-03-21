@@ -6,7 +6,7 @@ https://github.com/kcochibili/TinyDB--Android-Shared-Preferences-Turbo Tiny Data
 
 Brianne - 
 
-Sam - 
+Sam - Client UI improvements, client general code cleanup/documentation
 
 Dan - email system improvments, weekly reminder, force email sending thru client app
 
