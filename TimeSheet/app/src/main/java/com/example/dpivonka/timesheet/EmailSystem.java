@@ -10,8 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import it.enricocandino.androidmail.MailSender;
 import it.enricocandino.androidmail.model.Mail;
@@ -29,18 +28,19 @@ public class EmailSystem {
         Calendar calendar = Calendar.getInstance();
         //alarm occurs at 6PM
         calendar.set(Calendar.HOUR_OF_DAY, 18);
-        //calendar.set(Calendar.MINUTE, 47);
         //create intent and set alarm manager
         Intent intent = new Intent(context,AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, pendingIntent);
     }
 
     static void EmailAdmin(ArrayList<User> userList){
+        //lists to hold names of users
         ArrayList<String> signed = new ArrayList<>();
         ArrayList<String> notsigned = new ArrayList<>();
 
+        //fill lists above with names
         for (User user : userList) {
             if(user.signed==true){
                 signed.add(user.getUsername());
@@ -49,46 +49,49 @@ public class EmailSystem {
             }
         }
 
+        //create string that hold body of email
         String email = new String();
 
+        //fill email body with not signed names
         email = "Not Signed\n\n";
-
-
         for (String s : notsigned) {
             email += s+"\n";
         }
 
+        //fill body with signed names
         email += "\n\nSigned\n\n";
-
         for (String s : signed) {
             email += s+"\n";
         }
 
+        //create email and send it
         MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
         Mail.MailBuilder builder = new Mail.MailBuilder();
         Mail mail = builder
                 .setSender("timesheetautoemail@gmail.com")
                 .addRecipient(new Recipient("dpivonka@comcast.net"))
                 .setSubject("Weekly Signatures")
-                .setText("testing auto email system\n\n"+email)
+                .setText(email)
                 .build();
         mailSender.sendMail(mail);
 
         //reset all signed values for this week now that the email has sent
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
-        mEmployeeDatabaseReference.removeValue();
-        mEmployeeDatabaseReference.setValue("employees");
-        mEmployeeDatabaseReference.child("employees");
-        for (User user : userList) {
-            user.signed=false;
-            mEmployeeDatabaseReference.push().setValue(user);
+        if(!userList.isEmpty()){
+            FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
+            mEmployeeDatabaseReference.removeValue();
+            mEmployeeDatabaseReference.setValue("employees");
+            mEmployeeDatabaseReference.child("employees");
+            for (User user : userList) {
+                user.signed=false;
+                mEmployeeDatabaseReference.push().setValue(user);
+            }
         }
-
     }
 
     static void EmailReminder(ArrayList<User> userList){
 
+        //go thru users and send reminders to those who have no signed
         for (User user : userList) {
             if(user.signed==false){
                 MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
@@ -102,8 +105,7 @@ public class EmailSystem {
                 mailSender.sendMail(mail);
             }
         }
-
-
     }
+
 
 }
