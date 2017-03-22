@@ -105,19 +105,43 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {}
         });
         // Send button sends a message and clears the EditText
-        mSendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Clear input box
-                mNameEditText.setText("");
-            }
-        });
 
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
-            public void onStartSigning() {}
+            public void onStartSigning() {
+            }
             @Override
-            public void onSigned() {}
+            public void onSigned() {
+                mSendButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (userNames.contains(mNameEditText.getText().toString())) {
+                            mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
+                            mEmployeeDatabaseReference.removeValue();
+                            mEmployeeDatabaseReference.setValue("employees");
+                            mEmployeeDatabaseReference.child("employees");
+                            for (User user : userList) {
+                                if (user.getUsername().equals(mNameEditText.getText().toString())) {
+                                    if (user.signed == true) {
+                                        Toast.makeText(getApplicationContext(),
+                                                "Already signed this week.", Toast.LENGTH_SHORT).show();
+                                    }
+                                    user.signed = true;
+                                    mNameEditText.setText("");
+                                    mSignaturePad.clear();
+                                }
+                                mEmployeeDatabaseReference.push().setValue(user);
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(),
+                                    "Name could not be found.", Toast.LENGTH_SHORT).show();
+                            mNameEditText.setText("");
+                            mSignaturePad.clear();
+                        }
+                    }
+                });
+
+            }
             @Override
             public void onClear() {}
         });

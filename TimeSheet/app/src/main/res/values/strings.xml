@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">TimeSheet</string>
+    <string name="app_name">RA/TA Timesheet</string>
+    <string name="signature_inst">Please sign your name in the signature box below.</string>
 </resources>
