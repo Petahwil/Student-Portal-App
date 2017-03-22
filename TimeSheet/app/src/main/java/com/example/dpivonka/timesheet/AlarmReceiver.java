@@ -15,29 +15,27 @@ import java.util.Calendar;
  */
 public class AlarmReceiver extends BroadcastReceiver{
 
-    private ArrayList<User> userList = new ArrayList<>();
-    ArrayList<String> signed = new ArrayList<>();
-    ArrayList<String> notsigned = new ArrayList<>();
-
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        //get tinyDB reference
         TinyDB tinydb = new TinyDB(context);
+
         ArrayList<User> userList = new ArrayList<>();
 
+        //fill userList with data from tinyDB
         for (Object object : tinydb.getListObject("MyUsers", User.class)) {
             userList.add((User) object);
         }
 
         Calendar calendar = Calendar.getInstance();
 
-        Calendar timer  = Calendar.getInstance();
-
+        //get day and hour
         int day = calendar.get(Calendar.DAY_OF_WEEK);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
-
+        //if the hour is 6pm
         if(hour == 18){
+            //check day
             switch (day){
                 case Calendar.FRIDAY:
                     EmailSystem.EmailAdmin(userList);

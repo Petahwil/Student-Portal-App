@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -15,11 +15,7 @@ import android.widget.Toast;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 
@@ -31,9 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //initalize firebase reference
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
 
+        //initalize tinyDB
         final TinyDB tinydb = new TinyDB(getApplicationContext());
 
         //get users data everytime it changes
@@ -76,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
         //weekly email system
         EmailSystem.SetAlarm(getApplicationContext());
-
 
 
         mNameEditText = (EditText)findViewById(R.id.editText);

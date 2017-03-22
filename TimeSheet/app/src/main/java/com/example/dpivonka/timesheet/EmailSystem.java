@@ -36,9 +36,11 @@ public class EmailSystem {
     }
 
     static void EmailAdmin(ArrayList<User> userList){
+        //lists to hold names of users
         ArrayList<String> signed = new ArrayList<>();
         ArrayList<String> notsigned = new ArrayList<>();
 
+        //fill lists above with names
         for (User user : userList) {
             if(user.signed==true){
                 signed.add(user.getUsername());
@@ -47,21 +49,22 @@ public class EmailSystem {
             }
         }
 
+        //create string that hold body of email
         String email = new String();
 
+        //fill email body with not signed names
         email = "Not Signed\n\n";
-
-
         for (String s : notsigned) {
             email += s+"\n";
         }
 
+        //fill body with signed names
         email += "\n\nSigned\n\n";
-
         for (String s : signed) {
             email += s+"\n";
         }
 
+        //create email and send it
         MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
         Mail.MailBuilder builder = new Mail.MailBuilder();
         Mail mail = builder
@@ -88,6 +91,7 @@ public class EmailSystem {
 
     static void EmailReminder(ArrayList<User> userList){
 
+        //go thru users and send reminders to those who have no signed
         for (User user : userList) {
             if(user.signed==false){
                 MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
@@ -101,8 +105,7 @@ public class EmailSystem {
                 mailSender.sendMail(mail);
             }
         }
-
-
     }
+
 
 }
