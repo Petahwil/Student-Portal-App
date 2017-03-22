@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView actv;
 
     private ArrayList<User> userList = new ArrayList<>();
+    private ArrayList<String> userNames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
                     userList.add(user);
+                    userNames.add(user.getUsername());
                 }
                 tinydb.putListObject("MyUsers", userList);
             }
@@ -82,10 +84,9 @@ public class MainActivity extends AppCompatActivity {
         mClearButton = (Button) findViewById(R.id.clear_button);
         mSignaturePad = (SignaturePad) findViewById(R.id.signature_pad);
         actv = (AutoCompleteTextView) findViewById(R.id.editText);
-        String[] database_names = getResources().getStringArray(R.array.name_array);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this,android.R.layout.simple_list_item_1,database_names);
+                (this,android.R.layout.simple_list_item_1,userNames);
         actv.setAdapter(adapter);
 
         // Enable Send button when there's text to send
