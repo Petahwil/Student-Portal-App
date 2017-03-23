@@ -8,7 +8,11 @@ public class User extends Object{
 
     public String username;
     public String email;
+    public String Ta_Ra;
+    public String advisor;
+    public String code;
     public boolean signed;
+
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

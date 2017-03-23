@@ -49,7 +49,47 @@ public class MainActivity extends AppCompatActivity {
 
         //initalize firebase reference
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
+        mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
+
+
+
+        Data data = new Data();
+        Week week = new Week();
+        User user = new User();
+        user.username="steve";
+        user.email="adsfdf@sfdg.com";
+        user.Ta_Ra="TA";
+        user.advisor="mr.smith";
+        user.code="abc123";
+        user.signed=false;
+
+        week.employees.add(user);
+
+        user.username="john";
+        user.email="asdfgdffdf@sfdg.com";
+        user.Ta_Ra="RA";
+        user.advisor="mr.chen";
+        user.code="bfg354";
+        user.signed=true;
+
+        week.employees.add(user);
+
+        data.fall.weeks.add(week);
+        data.fall.weeks.add(week);
+
+        data.spring.weeks.add(week);
+
+
+
+        data.active="fall";
+
+        mEmployeeDatabaseReference.push().setValue(data);
+
+
+
+
+
+        mEmployeeDatabaseReference = mEmployeeDatabaseReference.child("employees");
 
         //initalize tinyDB
         final TinyDB tinydb = new TinyDB(getApplicationContext());
