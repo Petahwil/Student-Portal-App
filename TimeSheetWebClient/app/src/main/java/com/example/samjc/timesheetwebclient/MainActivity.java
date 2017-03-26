@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set up Firebase properties.
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
+        mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
 
         //read list of users into userList every time the database is updated.
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -83,6 +83,22 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         lvMain = (ListView) findViewById(R.id.lv_main);
         adapter = new UserAdapter(this, userList);

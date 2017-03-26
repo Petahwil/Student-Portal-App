@@ -20,6 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WeekActivity"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.dpivonka.timesheet.MainActivity" />
+        </activity>
+        <activity android:name=".SignActivity"
+            android:parentActivityName=".WeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.dpivonka.timesheet.WeekActivity" />
+        </activity>
 
         <receiver android:name=".AlarmReceiver"/>
 
