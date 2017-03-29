@@ -11,44 +11,62 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.dpivonka.timesheet.MainActivity">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_margin="5dp"
-        android:orientation="vertical"
-        android:layout_above="@+id/buttonLayout">
 
-        <AutoCompleteTextView
+
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:inputType="textPersonName"
-            android:imeOptions="actionDone"
-            android:hint="Begin typing your name here..."
-            android:id="@+id/editText"
-            android:ems="10"
-            android:minHeight="15dp" />
+            android:layout_height="fill_parent"
+            android:layout_margin="1dp"
+            android:orientation="vertical"
+            android:background="@android:color/black"
+            android:layout_above="@+id/buttonLayout">
 
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/welcome"
+                android:textColor="@android:color/white"
+                android:textStyle="bold|italic"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:minHeight="15dp"
+                />
 
+            <AutoCompleteTextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:inputType="textPersonName"
+                android:background="@android:color/white"
+                android:textColor="@android:color/black"
+                android:imeOptions="actionDone"
+                android:hint="Begin typing your name here..."
+                android:id="@+id/editText"
+                android:ems="10"
+                android:minHeight="25dp" />
 
-    </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/colorPrimary"
+                android:text="Next"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:id="@+id/nextButton"
+                android:layout_gravity="center_horizontal" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentBottom="true"
-        android:weightSum="2"
-        android:id="@+id/buttonLayout">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next"
-            android:id="@+id/nextButton"
-            android:layout_gravity="right|center"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        </LinearLayout>
 
 </RelativeLayout>
