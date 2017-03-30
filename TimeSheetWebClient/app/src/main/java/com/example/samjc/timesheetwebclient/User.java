@@ -1,42 +1,98 @@
 package com.example.samjc.timesheetwebclient;
 
 /**
- * Created by samjc on 3/6/2017.
+ * Created by wilsop4 on 3/3/2017.
  */
 
-public class User {
+public class User extends Object{
 
-    /**
-     * The {@link String} holding the name of the employee.
-     */
     public String username;
-    /**
-     * The {@link String} holding the email address of the employee.
-     */
     public String email;
-    /**
-     * The {@link Boolean} determining whether or not the employee has entered his/her hours for the week.
-     */
+    public String ta_ra;
+    public String advisor;
+    public String code;
     public boolean signed;
 
 
-    /**
-     * Default constructor required for calls to DataSnapshot.getValue(User.class)
-     */
-    public User() {}
+    public User() {
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
 
-    /**
-     * Constructor for {@link User} class.
-     * @param username The {@link String} used to initiate the "username" member variable of the {@link User} class.
-     * @param email The {@link String} used to initiate the "email" member variable of the {@link User} class.
-     */
     public User(String username, String email) {
         signed = false;
         this.username = username;
         this.email = email;
     }
 
-    public String getUsername (){
+
+    public User(String username, boolean signed) {
+        this.signed = signed;
+        this.username = username;
+
+    }
+
+    public User(String username, String email, String ta_ra, String advisor, String code) {
+        this.username = username;
+        this.email = email;
+        this.ta_ra = ta_ra;
+        this.advisor = advisor;
+        this.code = code;
+    }
+
+    public User(String username, String email, String ta_ra, String advisor, String code, boolean signed) {
+        this.username = username;
+        this.email = email;
+        this.ta_ra = ta_ra;
+        this.advisor = advisor;
+        this.code = code;
+        this.signed = signed;
+    }
+
+    public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTa_ra() {
+        return ta_ra;
+    }
+
+    public void setTa_ra(String ta_ra) {
+        this.ta_ra = ta_ra;
+    }
+
+    public String getAdvisor() {
+        return advisor;
+    }
+
+    public void setAdvisor(String advisor) {
+        this.advisor = advisor;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public boolean isSigned() {
+        return signed;
+    }
+
+    public void setSigned(boolean signed) {
+        this.signed = signed;
     }
 }
