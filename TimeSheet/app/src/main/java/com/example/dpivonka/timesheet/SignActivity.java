@@ -1,5 +1,6 @@
 package com.example.dpivonka.timesheet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -61,7 +62,9 @@ public class SignActivity extends AppCompatActivity {
                 mSendButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent intent = new Intent(SignActivity.this, MainActivity.class);
+                        Toast.makeText(getApplicationContext(), "Signature has been submitted.", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
                         //todo push signature data to firebase
 
                         //                User u = new User("dan pivonka", "dpivonka@comcast.net", "TA", "Mr.Johnson", "ABC123");
@@ -72,9 +75,12 @@ public class SignActivity extends AppCompatActivity {
 
                     }
                 });
+
+
             }
             @Override
             public void onClear() {}
+
         });
 
         //clear button
@@ -86,8 +92,8 @@ public class SignActivity extends AppCompatActivity {
             "Signature has been cleared.", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
+    }
 
 
 }
