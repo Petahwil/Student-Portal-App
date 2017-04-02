@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         actv = (AutoCompleteTextView) findViewById(R.id.editText);
         actv.setAdapter(adapter);
 
+        boolean hapen = false;
+
         //data listener
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
@@ -59,31 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 data = snapshot.child("Data").getValue(Data.class);
 
                 for(String s:data.ActiveSemester().ListOfUsernames()){
-                    System.out.println(s);
                     userNames.add(s);
                 }
-                //adapter.notifyDataSetChanged();
 
                 tinydb.putObject("data", data);
-
-
-                mEmployeeDatabaseReference.child("Data").setValue(data);
-
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-
-
-
-
-
-
-
-
-
-
 
         //weekly email system activation
         EmailSystem.SetAlarm(getApplicationContext());
@@ -101,12 +87,6 @@ public class MainActivity extends AppCompatActivity {
                     }
             }
         });
-
-
-
-
-
-
     }
 }
 

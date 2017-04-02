@@ -50,12 +50,9 @@ public class SignActivity extends AppCompatActivity {
         //get username and weeks signing for
         Bundle bundle = getIntent().getExtras();
         final String userName = bundle.getString("userName");
-        ArrayList<Integer> missedwWeeks = bundle.getIntegerArrayList("weeks");
+        final ArrayList<Integer> missedwWeeks = bundle.getIntegerArrayList("weeks");
         final boolean curentWeek = bundle.getBoolean("current");
-
-        //tis will be useful
-        ArrayList<Week> weeks = data.ActiveSemester().getWeeks();
-
+        
         //set up views
         mSendButton = (Button) findViewById(R.id.sigButton);
         mClearButton = (Button) findViewById(R.id.clear_button);
@@ -74,7 +71,7 @@ public class SignActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-
+                        //check what week it is and update if nessasary
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         Date endDate = null;
                         try {
@@ -84,8 +81,6 @@ public class SignActivity extends AppCompatActivity {
                         }
                         if (new Date().after(endDate)) {
                             for(int x = data.ActiveSemester().currentWeek; x < data.ActiveSemester().weeks.size(); x++){
-
-
                                 try {
                                     endDate = sdf.parse(data.ActiveSemester().weeks.get(x).getEndDate());
                                 } catch (ParseException e) {
@@ -98,9 +93,8 @@ public class SignActivity extends AppCompatActivity {
                             }
                         }
 
-
+                        //sign for current week
                         if(curentWeek){
-
                             for(User u: data.ActiveSemester().weeks.get(data.ActiveSemester().currentWeek).employees){
                                 if(u.getUsername().equals(userName)){
                                     u.setSigned(true);
@@ -109,13 +103,20 @@ public class SignActivity extends AppCompatActivity {
                             }
                         }
 
+                        //sign for missed weeks
+                        for(int i: missedwWeeks){
+                            for(User u: data.ActiveSemester().weeks.get(i-1).employees){
+                                if(u.getUsername().equals(userName)){
+                                    u.setSigned(true);
+                                    break;
+                                }
+                            }
+                        }
 
-                        //todo sign for missed weeks
-
-
+                        //push changes to firebase
                         mEmployeeDatabaseReference.child("Data").setValue(data);
 
-
+                        //return to main activity
                         Intent intent = new Intent(SignActivity.this, MainActivity.class);
                         Toast.makeText(getApplicationContext(), "Signature has been submitted.", Toast.LENGTH_LONG).show();
                         startActivity(intent);
