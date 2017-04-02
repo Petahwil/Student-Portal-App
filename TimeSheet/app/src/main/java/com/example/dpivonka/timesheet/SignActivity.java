@@ -8,9 +8,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.Date;
 
 /**
  * Created by dpivonka on 3/25/17.
@@ -25,10 +29,17 @@ public class SignActivity extends AppCompatActivity {
     private Button mClearButton;
     private SignaturePad mSignaturePad;
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mEmployeeDatabaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
+
+        //initalize firebase reference
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
 
         //initalize tinyDB
         tinydb = new TinyDB(getApplicationContext());
@@ -38,12 +49,12 @@ public class SignActivity extends AppCompatActivity {
 
         //get username and weeks signing for
         Bundle bundle = getIntent().getExtras();
-        String userName = bundle.getString("userName");
+        final String userName = bundle.getString("userName");
         ArrayList<Integer> missedwWeeks = bundle.getIntegerArrayList("weeks");
-        boolean curentWeek = bundle.getBoolean("current");
+        final boolean curentWeek = bundle.getBoolean("current");
 
         //tis will be useful
-        ArrayList<Week> weeks = data.getActiveSemester().getWeeks();
+        ArrayList<Week> weeks = data.ActiveSemester().getWeeks();
 
         //set up views
         mSendButton = (Button) findViewById(R.id.sigButton);
@@ -62,17 +73,52 @@ public class SignActivity extends AppCompatActivity {
                 mSendButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date endDate = null;
+                        try {
+                            endDate = sdf.parse(data.ActiveSemester().weeks.get(data.ActiveSemester().currentWeek).getEndDate());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if (new Date().after(endDate)) {
+                            for(int x = data.ActiveSemester().currentWeek; x < data.ActiveSemester().weeks.size(); x++){
+
+
+                                try {
+                                    endDate = sdf.parse(data.ActiveSemester().weeks.get(x).getEndDate());
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                if(new Date().before(endDate)){
+                                    data.ActiveSemester().setCurrentWeek(x);
+                                    break;
+                                }
+                            }
+                        }
+
+
+                        if(curentWeek){
+
+                            for(User u: data.ActiveSemester().weeks.get(data.ActiveSemester().currentWeek).employees){
+                                if(u.getUsername().equals(userName)){
+                                    u.setSigned(true);
+                                    break;
+                                }
+                            }
+                        }
+
+
+                        //todo sign for missed weeks
+
+
+                        mEmployeeDatabaseReference.child("Data").setValue(data);
+
+
                         Intent intent = new Intent(SignActivity.this, MainActivity.class);
                         Toast.makeText(getApplicationContext(), "Signature has been submitted.", Toast.LENGTH_LONG).show();
                         startActivity(intent);
-                        //todo push signature data to firebase
-
-                        //                User u = new User("dan pivonka", "dpivonka@comcast.net", "TA", "Mr.Johnson", "ABC123");
-                        //
-                        //                data.getSpring().employees.add(u);
-                        //
-                        //                mEmployeeDatabaseReference.child("Data").child("spring").child("employees").setValue(data.spring.employees);
-
                     }
                 });
 

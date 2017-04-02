@@ -26,8 +26,8 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:textSize="20sp"
-                    android:textColor="@android:color/white"
-                    android:background="@color/colorPrimary"
+                    android:buttonTint="@android:color/white"
+                    android:background="@android:color/darker_gray"
                     android:checked="true"/>
 
                 <TextView

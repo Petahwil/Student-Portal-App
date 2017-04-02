@@ -1,5 +1,4 @@
-package com.example.dpivonka.timesheet;
-
+package com.example.samjc.timesheetwebclient;
 /**
  * Created by dpivonka on 3/23/17.
  */
@@ -44,7 +43,7 @@ public class Data {
         this.spring = spring;
     }
 
-    public Semester getActiveSemester(){
+    public Semester ActiveSemester(){
         if(active.equals("fall")|| active.equals("Fall")||active.equals("FALL")){
             return fall;
         }else{

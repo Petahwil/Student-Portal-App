@@ -1,5 +1,7 @@
 package com.example.samjc.timesheetwebclient;
 
+
+
 import java.util.ArrayList;
 
 /**
@@ -16,6 +18,13 @@ public class Semester {
 
     public Semester(){
 
+    }
+
+    public Semester(String startdate, int numWeeks, ArrayList<User> employees, ArrayList<Week> weeks) {
+        this.startdate = startdate;
+        this.numWeeks = numWeeks;
+        this.employees = employees;
+        this.weeks = weeks;
     }
 
     public Semester(String startdate, String enddate, ArrayList<User> employees, ArrayList<Week> weeks) {
@@ -65,7 +74,7 @@ public class Semester {
         this.weeks = weeks;
     }
 
-    public ArrayList<String> getListOfUsernames(){
+    public ArrayList<String> ListOfUsernames(){
         ArrayList<String> usernames = new ArrayList<>();
 
         for(User u: employees){

@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * Created by dpivonka on 3/25/17.
@@ -52,12 +51,12 @@ public class WeekActivity extends AppCompatActivity {
         tv.setVisibility(View.GONE);
 
         //weeks and missed weeks
-        ArrayList<Week> weeks = data.getActiveSemester().getWeeks();
+        ArrayList<Week> weeks = data.ActiveSemester().getWeeks();
         final ArrayList<Integer> missedwWeeks = new ArrayList<>();
 
         //figure out missed weeks
         int week_num = 1;
-        for(Week w: data.getActiveSemester().weeks){
+        for(Week w: data.ActiveSemester().weeks){
             for(User u: w.employees){
                 if(u.getUsername().equals(userName) && u.signed == false){
                     missedwWeeks.add(week_num);

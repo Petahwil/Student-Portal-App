@@ -58,18 +58,32 @@ public class MainActivity extends AppCompatActivity {
                 userNames.clear();
                 data = snapshot.child("Data").getValue(Data.class);
 
-                for(String s:data.getActiveSemester().getListOfUsernames()){
+                for(String s:data.ActiveSemester().ListOfUsernames()){
                     System.out.println(s);
                     userNames.add(s);
                 }
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
 
                 tinydb.putObject("data", data);
+
+
+                mEmployeeDatabaseReference.child("Data").setValue(data);
+
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
+
+
+
+
+
+
+
+
+
+
 
         //weekly email system activation
         EmailSystem.SetAlarm(getApplicationContext());

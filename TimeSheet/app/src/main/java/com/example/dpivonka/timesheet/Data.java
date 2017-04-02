@@ -44,7 +44,7 @@ public class Data {
         this.spring = spring;
     }
 
-    public Semester getActiveSemester(){
+    public Semester ActiveSemester(){
         if(active.equals("fall")|| active.equals("Fall")||active.equals("FALL")){
             return fall;
         }else{
