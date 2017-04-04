@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link DatabaseReference} to the employees in the Firebase database.
      */
     private DatabaseReference mEmployeeDatabaseReference;
+    Data data;
     //endregion
     /**
      * The {@link ArrayList<User>} that holds all users in database.
@@ -72,33 +73,18 @@ public class MainActivity extends AppCompatActivity {
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
                 userList.clear();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    User user = postSnapshot.getValue(User.class);
-                    userList.add(user);
-                    sortUsers();
-                    adapter.notifyDataSetChanged();
+                data = snapshot.child("Data").getValue(Data.class);
+
+                for(User u:data.getActiveSemester().getEmployees()){
+                    userList.add(u);
                 }
+                sortUsers();
+                adapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         lvMain = (ListView) findViewById(R.id.lv_main);
         adapter = new UserAdapter(this, userList);
@@ -225,6 +211,15 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(),
                 "Email Sent", Toast.LENGTH_SHORT).show();
+    }
+
+    User findUserByName(String name) {
+        for (User u:data.getActiveSemester().getEmployees()) {
+            if (name.equals(u.getUsername())) {
+                return u;
+            }
+        }
+        return null;
     }
 
     //endregion

@@ -52,7 +52,7 @@ public class SignActivity extends AppCompatActivity {
         final String userName = bundle.getString("userName");
         final ArrayList<Integer> missedwWeeks = bundle.getIntegerArrayList("weeks");
         final boolean curentWeek = bundle.getBoolean("current");
-        
+
         //set up views
         mSendButton = (Button) findViewById(R.id.sigButton);
         mClearButton = (Button) findViewById(R.id.clear_button);

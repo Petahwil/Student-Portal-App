@@ -1,4 +1,8 @@
 package com.example.samjc.timesheetwebclient;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c28d7ba... Web client updates for new Firebase structure
 /**
  * Created by dpivonka on 3/23/17.
  */
