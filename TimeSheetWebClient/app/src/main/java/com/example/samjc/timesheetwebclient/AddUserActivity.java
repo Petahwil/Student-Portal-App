@@ -145,8 +145,8 @@ public class AddUserActivity extends AppCompatActivity {
      */
     private void writeNewUser(String name, String email, String position, String faculty, String account) {
         User user = new User(name, email, position, faculty, account);
-        data.getActiveSemester().employees.add(user);
-        for (Week w:data.getActiveSemester().getWeeks()) {
+        data.ActiveSemester().employees.add(user);
+        for (Week w:data.ActiveSemester().getWeeks()) {
             w.getEmployees().add(new User(name, false));
         }
         mEmployeeDatabaseReference.child("Data").setValue(data);

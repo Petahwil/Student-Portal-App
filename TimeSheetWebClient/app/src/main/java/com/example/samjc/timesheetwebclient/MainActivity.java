@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 userList.clear();
                 data = snapshot.child("Data").getValue(Data.class);
 
-                for(User u:data.getActiveSemester().getEmployees()){
+                for(User u:data.ActiveSemester().getEmployees()){
                     userList.add(u);
                 }
                 sortUsers();
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     User findUserByName(String name) {
-        for (User u:data.getActiveSemester().getEmployees()) {
+        for (User u:data.ActiveSemester().getEmployees()) {
             if (name.equals(u.getUsername())) {
                 return u;
             }
