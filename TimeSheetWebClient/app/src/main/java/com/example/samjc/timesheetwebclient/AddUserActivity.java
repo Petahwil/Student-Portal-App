@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -18,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class AddUserActivity extends AppCompatActivity {
 
@@ -35,17 +39,23 @@ public class AddUserActivity extends AppCompatActivity {
     //endregion
     //region UI Elements
     /**
-     * The {@link EditText} where user enters name of the new user.
+     * The {@link AutoCompleteTextView} where user enters name of the new user.
      */
-    EditText nameEdit;
+    AutoCompleteTextView nameEdit;
     /**
-     * The {@link EditText} where user enters email address of the new user.
+     * The {@link AutoCompleteTextView} where user enters email address of the new user.
      */
-    EditText emailEdit;
+    AutoCompleteTextView emailEdit;
     RadioGroup positionGroup;
     RadioButton positionButton;
-    EditText facultyEdit;
+    AutoCompleteTextView facultyEdit;
     EditText accountEdit;
+    ArrayAdapter<String> nameAdapter;
+    ArrayAdapter<String> emailAdapter;
+    ArrayAdapter<String> facultyAdapter;
+    ArrayList<String> nameList;
+    ArrayList<String> emailList;
+    ArrayList<String> facultyList;
     //endregion
     //endregion
 
@@ -62,24 +72,43 @@ public class AddUserActivity extends AppCompatActivity {
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
                 data = snapshot.child("Data").getValue(Data.class);
+
+                nameList.clear();
+                emailList.clear();
+                facultyList.clear();
+
+                for (User u:data.ActiveSemester().getEmployees()) {
+                    nameList.add(u.getUsername());
+                    emailList.add(u.getEmail());
+                    facultyList.add(u.getAdvisor());
+                }
+
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
 
+        nameList = new ArrayList<String>();
+        emailList = new ArrayList<String>();
+        facultyList = new ArrayList<String>();
+
         //set up UI Element fields
-        nameEdit = (EditText) findViewById(R.id.name_edit);
-        emailEdit = (EditText) findViewById(R.id.email_edit);
+        nameEdit = (AutoCompleteTextView) findViewById(R.id.name_edit);
+        emailEdit = (AutoCompleteTextView) findViewById(R.id.email_edit);
         positionGroup = (RadioGroup) findViewById(R.id.rgroup_position);
-        facultyEdit = (EditText) findViewById(R.id.faculty_edit);
+        facultyEdit = (AutoCompleteTextView) findViewById(R.id.faculty_edit);
         accountEdit = (EditText) findViewById(R.id.account_edit);
 
+        nameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nameList);
+        emailAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, emailList);
+        facultyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, facultyList);
 
+        nameEdit.setAdapter(nameAdapter);
+        emailEdit.setAdapter(emailAdapter);
+        facultyEdit.setAdapter(facultyAdapter);
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,8 +174,8 @@ public class AddUserActivity extends AppCompatActivity {
      */
     private void writeNewUser(String name, String email, String position, String faculty, String account) {
         User user = new User(name, email, position, faculty, account);
-        data.getActiveSemester().employees.add(user);
-        for (Week w:data.getActiveSemester().getWeeks()) {
+        data.ActiveSemester().employees.add(user);
+        for (Week w:data.ActiveSemester().getWeeks()) {
             w.getEmployees().add(new User(name, false));
         }
         mEmployeeDatabaseReference.child("Data").setValue(data);

@@ -23,12 +23,12 @@
             android:textSize="@dimen/text_size"
             android:text="@string/name"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:id="@+id/name_edit"
-            android:inputType="text"/>
+            android:inputType="textPersonName"
+            android:imeOptions="actionDone"
+            android:id="@+id/name_edit"/>
 
     </LinearLayout>
 
@@ -43,12 +43,12 @@
             android:textSize="@dimen/text_size"
             android:text="@string/email_address"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:id="@+id/email_edit"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionDone"
+            android:id="@+id/email_edit"/>
 
     </LinearLayout>
 
@@ -96,10 +96,11 @@
             android:textSize="@dimen/text_size"
             android:text="Faculty Advisor:"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:inputType="textPersonName"
+            android:imeOptions="actionDone"
             android:id="@+id/faculty_edit"/>
 
     </LinearLayout>

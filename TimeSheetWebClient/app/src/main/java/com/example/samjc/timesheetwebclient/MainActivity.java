@@ -1,5 +1,6 @@
 package com.example.samjc.timesheetwebclient;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 userList.clear();
                 data = snapshot.child("Data").getValue(Data.class);
 
-                for(User u:data.getActiveSemester().getEmployees()){
+                for(User u:data.ActiveSemester().getEmployees()){
                     userList.add(u);
                 }
                 sortUsers();
@@ -119,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-
     }
 
     //region MENU FUNCTIONS
@@ -137,7 +137,29 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, AddUserActivity.class));
                 return true;
             case R.id.action_email:
-                EmailAdmin();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("What information do you need?")
+                .setItems(R.array.email_array, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                System.out.println("0");
+                                //send this semester
+                                break;
+                            case 1:
+                                System.out.println("1");
+                                //send last semester
+                                break;
+                            default:
+                                System.out.println("-1");
+                                break;
+                        }
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+                //EmailAdmin();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -214,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     User findUserByName(String name) {
-        for (User u:data.getActiveSemester().getEmployees()) {
+        for (User u:data.ActiveSemester().getEmployees()) {
             if (name.equals(u.getUsername())) {
                 return u;
             }

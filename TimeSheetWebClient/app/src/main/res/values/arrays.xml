@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="email_array">
+        <item>This semester</item>
+        <item>Last semester</item>
+    </string-array>
+</resources>
