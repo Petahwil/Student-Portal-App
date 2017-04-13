@@ -32,6 +32,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:minHeight="15dp"
+                android:id="@+id/welcomeText"
                 />
 
             <AutoCompleteTextView

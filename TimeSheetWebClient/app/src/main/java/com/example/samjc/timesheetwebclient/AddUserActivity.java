@@ -77,7 +77,7 @@ public class AddUserActivity extends AppCompatActivity {
                 emailList.clear();
                 facultyList.clear();
 
-                for (User u:data.ActiveSemester().getEmployees()) {
+                for (User u:data.NonActiveSemester().getEmployees()) {
                     nameList.add(u.getUsername());
                     emailList.add(u.getEmail());
                     facultyList.add(u.getAdvisor());

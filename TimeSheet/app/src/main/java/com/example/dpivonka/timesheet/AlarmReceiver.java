@@ -20,11 +20,13 @@ public class AlarmReceiver extends BroadcastReceiver{
         //get tinyDB reference
         TinyDB tinydb = new TinyDB(context);
 
+        Data data = (Data) tinydb.getObject("data", Data.class);
+
         ArrayList<User> userList = new ArrayList<>();
 
         //fill userList with data from tinyDB
-        for (Object object : tinydb.getListObject("MyUsers", User.class)) {
-            userList.add((User) object);
+        for (User u : data.ActiveSemester().employees) {
+            userList.add(u);
         }
 
         Calendar calendar = Calendar.getInstance();

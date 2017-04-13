@@ -103,6 +103,23 @@ public class MainActivity extends AppCompatActivity {
 
                         //reset adapter and apply to lvMain to update list.
                         adapter.notifyDataSetChanged();
+
+                        int x;
+                        for(x = 0; x < data.ActiveSemester().employees.size(); x++){
+                            if(data.ActiveSemester().employees.get(x).getUsername().equals(user.getUsername())){
+                                break;
+                            }
+                        }
+
+                        data.ActiveSemester().employees.remove(x);
+
+                        for(Week w: data.ActiveSemester().getWeeks()){
+                            w.employees.remove(x);
+                        }
+                        
+                        mEmployeeDatabaseReference.child("Data").setValue(data);
+
+
                         //adapter = new UserAdapter(MainActivity.this, userList);
                         //lvMain.setAdapter(adapter);
                         Toast.makeText(getApplicationContext(), "User \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG).show();
