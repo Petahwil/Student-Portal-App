@@ -1,5 +1,6 @@
 package com.example.samjc.timesheetwebclient;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link DatabaseReference} to the employees in the Firebase database.
      */
     private DatabaseReference mEmployeeDatabaseReference;
+    Data data;
     //endregion
     /**
      * The {@link ArrayList<User>} that holds all users in database.
@@ -72,33 +74,18 @@ public class MainActivity extends AppCompatActivity {
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
                 userList.clear();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    User user = postSnapshot.getValue(User.class);
-                    userList.add(user);
-                    sortUsers();
-                    adapter.notifyDataSetChanged();
+                data = snapshot.child("Data").getValue(Data.class);
+
+                for(User u:data.ActiveSemester().getEmployees()){
+                    userList.add(u);
                 }
+                sortUsers();
+                adapter.notifyDataSetChanged();
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         lvMain = (ListView) findViewById(R.id.lv_main);
         adapter = new UserAdapter(this, userList);
@@ -116,6 +103,23 @@ public class MainActivity extends AppCompatActivity {
 
                         //reset adapter and apply to lvMain to update list.
                         adapter.notifyDataSetChanged();
+
+                        int x;
+                        for(x = 0; x < data.ActiveSemester().employees.size(); x++){
+                            if(data.ActiveSemester().employees.get(x).getUsername().equals(user.getUsername())){
+                                break;
+                            }
+                        }
+
+                        data.ActiveSemester().employees.remove(x);
+
+                        for(Week w: data.ActiveSemester().getWeeks()){
+                            w.employees.remove(x);
+                        }
+
+                        mEmployeeDatabaseReference.child("Data").setValue(data);
+
+
                         //adapter = new UserAdapter(MainActivity.this, userList);
                         //lvMain.setAdapter(adapter);
                         Toast.makeText(getApplicationContext(), "User \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG).show();
@@ -133,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
             }
         });
-
     }
 
     //region MENU FUNCTIONS
@@ -151,7 +154,29 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, AddUserActivity.class));
                 return true;
             case R.id.action_email:
-                EmailAdmin();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("What information do you need?")
+                .setItems(R.array.email_array, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                System.out.println("0");
+                                //send this semester
+                                break;
+                            case 1:
+                                System.out.println("1");
+                                //send last semester
+                                break;
+                            default:
+                                System.out.println("-1");
+                                break;
+                        }
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+                //EmailAdmin();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -225,6 +250,15 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(),
                 "Email Sent", Toast.LENGTH_SHORT).show();
+    }
+
+    User findUserByName(String name) {
+        for (User u:data.ActiveSemester().getEmployees()) {
+            if (name.equals(u.getUsername())) {
+                return u;
+            }
+        }
+        return null;
     }
 
     //endregion

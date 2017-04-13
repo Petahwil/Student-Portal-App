@@ -1,4 +1,5 @@
 package com.example.samjc.timesheetwebclient;
+
 /**
  * Created by dpivonka on 3/23/17.
  */
@@ -48,6 +49,15 @@ public class Data {
             return fall;
         }else{
             return spring;
+        }
+
+    }
+
+    public Semester NonActiveSemester(){
+        if(active.equals("fall")|| active.equals("Fall")||active.equals("FALL")){
+            return spring;
+        }else{
+            return fall;
         }
 
     }

@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_add_new_person"
+    android:id="@+id/activity_add_semester"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.samjc.timesheetwebclient.AddUserActivity">
+    tools:context="com.example.samjc.timesheetwebclient.AddSemesterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,12 +23,12 @@
             android:textSize="@dimen/text_size"
             android:text="@string/name"/>
 
-        <AutoCompleteTextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:imeOptions="actionDone"
-            android:id="@+id/name_edit"/>
+            android:textSize="@dimen/text_size"
+            android:id="@+id/name_edit"
+            android:inputType="text"/>
 
     </LinearLayout>
 
@@ -43,12 +43,12 @@
             android:textSize="@dimen/text_size"
             android:text="@string/email_address"/>
 
-        <AutoCompleteTextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:imeOptions="actionDone"
-            android:id="@+id/email_edit"/>
+            android:textSize="@dimen/text_size"
+            android:id="@+id/email_edit"
+            android:inputType="textEmailAddress"/>
 
     </LinearLayout>
 
@@ -82,45 +82,6 @@
                 android:id="@+id/radio_ra"/>
 
         </RadioGroup>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:text="Faculty Advisor:"/>
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:imeOptions="actionDone"
-            android:id="@+id/faculty_edit"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:text="HR Account Code:"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:id="@+id/account_edit"/>
 
     </LinearLayout>
 

@@ -1,7 +1,13 @@
 package com.example.dpivonka.timesheet;
 
+import android.content.Context;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.media.Image;
+=======
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+>>>>>>> ab1ebc0758227c999eed214d537895c32a52c3a8
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -9,7 +15,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.ImageView;
+=======
+import android.widget.TextView;
+>>>>>>> ab1ebc0758227c999eed214d537895c32a52c3a8
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private TinyDB tinydb;
 
     private EditText mNameEditText;
+    private TextView mWelcomeText;
     private Button mNextButton;
     private AutoCompleteTextView actv;
     private ImageView logo, logo2;
@@ -51,11 +62,22 @@ public class MainActivity extends AppCompatActivity {
 
         //layout features
         mNameEditText = (EditText)findViewById(R.id.editText);
+        mWelcomeText = (TextView) findViewById(R.id.welcomeText);
         mNextButton = (Button) findViewById(R.id.nextButton);
         actv = (AutoCompleteTextView) findViewById(R.id.editText);
         actv.setAdapter(adapter);
 
-        boolean hapen = false;
+        //check for network and adjust views
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nwInfo = connectivityManager.getActiveNetworkInfo();
+        if (nwInfo != null && nwInfo.isConnectedOrConnecting()) {
+            mWelcomeText.setText(R.string.welcome);
+        } else {
+            mNextButton.setVisibility(View.INVISIBLE);
+            actv.setVisibility(View.INVISIBLE);
+            mWelcomeText.setText("No Network Conection");
+        }
 
         //data listener
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {

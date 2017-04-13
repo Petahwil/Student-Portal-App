@@ -52,7 +52,7 @@ public class SignActivity extends AppCompatActivity {
         final String userName = bundle.getString("userName");
         final ArrayList<Integer> missedwWeeks = bundle.getIntegerArrayList("weeks");
         final boolean curentWeek = bundle.getBoolean("current");
-        
+
         //set up views
         mSendButton = (Button) findViewById(R.id.sigButton);
         mClearButton = (Button) findViewById(R.id.clear_button);
@@ -72,7 +72,7 @@ public class SignActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         //check what week it is and update if nessasary
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                         Date endDate = null;
                         try {
                             endDate = sdf.parse(data.ActiveSemester().weeks.get(data.ActiveSemester().currentWeek).getEndDate());
