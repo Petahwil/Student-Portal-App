@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mWelcomeText;
     private Button mNextButton;
     private AutoCompleteTextView actv;
-    private ImageView logo, logo2;
+    private ImageView logo, rh2, rh1;
 
     private ArrayList<String> userNames = new ArrayList<>();
     private Data data;
@@ -97,8 +97,15 @@ public class MainActivity extends AppCompatActivity {
 
         //weekly email system activation
         EmailSystem.SetAlarm(getApplicationContext());
+
+        rh2 = (ImageView) findViewById(R.id.uml_rh2);
+        rh2.setImageResource(R.drawable.river_hawk2);
+
         logo = (ImageView) findViewById(R.id.uml_image);
         logo.setImageResource(R.drawable.uml);
+
+        rh1 = (ImageView) findViewById(R.id.uml_rh1);
+        rh1.setImageResource(R.drawable.river_hawk1);
 
 
         //listener for next button
