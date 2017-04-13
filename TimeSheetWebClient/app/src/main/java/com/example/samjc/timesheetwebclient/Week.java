@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Week {
+    public String endDate;
     public ArrayList<User> employees = new ArrayList<>();
 
     public Week(){
@@ -15,6 +16,23 @@ public class Week {
 
     public Week(ArrayList<User> employees) {
         this.employees = employees;
+    }
+
+    public Week(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public Week(String startDate, ArrayList<User> employees) {
+        this.endDate = startDate;
+        this.employees = employees;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public ArrayList<User> getEmployees() {

@@ -53,4 +53,13 @@ public class Data {
 
     }
 
+    public Semester NonActiveSemester(){
+        if(active.equals("fall")|| active.equals("Fall")||active.equals("FALL")){
+            return spring;
+        }else{
+            return fall;
+        }
+
+    }
+
 }
