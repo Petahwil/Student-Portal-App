@@ -1,7 +1,7 @@
 package com.example.samjc.timesheetwebclient;
 
 import android.app.DatePickerDialog;
-import android.icu.util.Calendar;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -66,20 +68,6 @@ public class AddSemesterActivity extends AppCompatActivity{
         } else {
             data.setActive("Fall");
         }
-
-//        how to create a new semester
-//
-//        change active field in data class
-//
-//        set non-active semester to new semester object containing the following
-//
-//        current week = 0
-//        employees should be empty
-//        set start and end dates
-//        calculate number of weeks
-//        create list of weeks each week needs it enddate set calculate that date based off start and enddate
-
-
     }
 
     @Override
@@ -88,6 +76,7 @@ public class AddSemesterActivity extends AppCompatActivity{
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -174,7 +163,34 @@ public class AddSemesterActivity extends AppCompatActivity{
                 if (startDate.equals("ERROR") || endDate.equals("ERROR")) {
                     Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
                 } else {
-                    //add semester to database
+                    Calendar start = Calendar.getInstance();
+                    Calendar end = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("M/d/yy", Locale.US);
+                    try {
+                        start.setTime(sdf.parse(startDate));
+                        end.setTime(sdf.parse(endDate));
+                    } catch (ParseException e) {
+                        Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                    int numWeeks = end.getWeekYear() - start.getWeekYear();
+
+                    ArrayList<Week> weeks = new ArrayList<Week>();
+                    Calendar tempCal = start;
+                    tempCal.add(Calendar.DATE, Calendar.FRIDAY - tempCal.get(Calendar.DAY_OF_WEEK) - 7);
+                    if (tempCal.before(end)) {
+                        start.add(Calendar.DATE, 7);
+                        weeks.add(new Week(sdf.format(tempCal.getTime())));
+                    }
+
+                    data.ActiveSemester().setStartdate(startDate);
+                    data.ActiveSemester().setEnddate(endDate);
+                    data.ActiveSemester().setWeeks(weeks);
+                    data.ActiveSemester().setCurrentWeek(0);
+                    data.ActiveSemester().employees.clear();
+                    data.ActiveSemester().numWeeks = numWeeks;
+
+                    startActivity(new Intent(this, MainActivity.class));
                 }
 
                 return true;
