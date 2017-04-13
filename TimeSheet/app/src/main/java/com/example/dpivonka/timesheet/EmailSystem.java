@@ -75,18 +75,6 @@ public class EmailSystem {
                 .build();
         mailSender.sendMail(mail);
 
-        //reset all signed values for this week now that the email has sent
-        if(!userList.isEmpty()){
-            FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference mEmployeeDatabaseReference = mFirebaseDatabase.getReference().child("employees");
-            mEmployeeDatabaseReference.removeValue();
-            mEmployeeDatabaseReference.setValue("employees");
-            mEmployeeDatabaseReference.child("employees");
-            for (User user : userList) {
-                user.signed=false;
-                mEmployeeDatabaseReference.push().setValue(user);
-            }
-        }
     }
 
     static void EmailReminder(ArrayList<User> userList){
@@ -100,7 +88,7 @@ public class EmailSystem {
                         .setSender("timesheetautoemail@gmail.com")
                         .addRecipient(new Recipient(user.email))
                         .setSubject("TimeSheet Reminder")
-                        .setText("You have not signed your timesheet for this week. Tomorrow is the last day to sign for this week.\n")
+                        .setText("You have not signed your time sheet for this week. Tomorrow is the last day to sign for this week on time.\n")
                         .build();
                 mailSender.sendMail(mail);
             }

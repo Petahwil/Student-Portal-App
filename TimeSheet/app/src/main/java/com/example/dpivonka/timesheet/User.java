@@ -31,6 +31,12 @@ public class User extends Object{
 
     }
 
+    public User(String username, String email, boolean signed) {
+        this.username = username;
+        this.email = email;
+        this.signed = signed;
+    }
+
     public User(String username, String email, String ta_ra, String advisor, String code) {
         this.username = username;
         this.email = email;

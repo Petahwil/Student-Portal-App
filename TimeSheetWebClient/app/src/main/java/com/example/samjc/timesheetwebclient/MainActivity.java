@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         for(Week w: data.ActiveSemester().getWeeks()){
                             w.employees.remove(x);
                         }
-                        
+
                         mEmployeeDatabaseReference.child("Data").setValue(data);
 
 
