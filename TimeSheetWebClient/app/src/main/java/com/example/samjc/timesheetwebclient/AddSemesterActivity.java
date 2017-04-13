@@ -30,9 +30,8 @@ import java.util.logging.Logger;
 
 public class AddSemesterActivity extends AppCompatActivity{
 
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mEmployeeDatabaseReference;
     private Data data;
+    private TinyDB tinydb;
 
     EditText startDateEditMonth;
     EditText startDateEditDay;
@@ -49,10 +48,6 @@ public class AddSemesterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_semester);
 
-        //set up Firebase properties
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
-
         startDateEditMonth = (EditText) findViewById(R.id.start_date_month_edit);
         startDateEditDay = (EditText) findViewById(R.id.start_date_day_edit);
         startDateEditYear = (EditText) findViewById(R.id.start_date_year_edit);
@@ -60,20 +55,11 @@ public class AddSemesterActivity extends AppCompatActivity{
         endDateEditDay = (EditText) findViewById(R.id.end_date_day_edit);
         endDateEditYear = (EditText) findViewById(R.id.end_date_year_edit);
 
+        //initalize tinyDB
+        tinydb = new TinyDB(getApplicationContext());
 
-
-
-
-
-        //data listener
-        mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
-            public void onDataChange(DataSnapshot snapshot) {
-                data = snapshot.child("Data").getValue(Data.class);
-            }
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getMessage());
-            }
-        });
+        //get data object
+        data = (Data) tinydb.getObject("data", Data.class);
 
         if (data.getActive().equals("Fall")) {
             data.setActive("Spring");

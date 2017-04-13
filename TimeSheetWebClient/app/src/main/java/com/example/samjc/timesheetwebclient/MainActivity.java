@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
      * The {@link UserAdapter} that will populate the {@link ListView} with the users in userList.
      */
     private UserAdapter adapter;
+
+    private TinyDB tinydb;
     //endregion
 
     @Override
@@ -69,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         //set up Firebase properties.
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
+
+        //initalize tinyDB
+        tinydb = new TinyDB(getApplicationContext());
 
         //read list of users into userList every time the database is updated.
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -81,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 sortUsers();
                 adapter.notifyDataSetChanged();
+
+                tinydb.putObject("data", data);
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
