@@ -2,12 +2,11 @@ package com.example.dpivonka.timesheet;
 
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.media.Image;
-=======
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
->>>>>>> ab1ebc0758227c999eed214d537895c32a52c3a8
+
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -15,11 +14,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-<<<<<<< HEAD
+
+
 import android.widget.ImageView;
-=======
 import android.widget.TextView;
->>>>>>> ab1ebc0758227c999eed214d537895c32a52c3a8
+
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
