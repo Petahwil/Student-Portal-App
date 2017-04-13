@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_add:
+            case R.id.action_add_user:
                 startActivity(new Intent(this, AddUserActivity.class));
                 return true;
             case R.id.action_email:
@@ -160,6 +160,9 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog alert = builder.create();
                 alert.show();
                 //EmailAdmin();
+                return true;
+            case R.id.action_add_semester:
+                startActivity(new Intent(this, AddSemesterActivity.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
