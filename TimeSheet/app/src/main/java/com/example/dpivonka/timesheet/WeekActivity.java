@@ -35,6 +35,7 @@ public class WeekActivity extends AppCompatActivity {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mEmployeeDatabaseReference;
+    private static String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,10 @@ public class WeekActivity extends AppCompatActivity {
         //get data object
         data = (Data) tinydb.getObject("data", Data.class);
 
-        //get username
         Bundle bundle = getIntent().getExtras();
-        final String userName = bundle.getString("userName");
+        //get username
+        if (bundle != null)
+            userName = bundle.getString("userName");
 
         //layout features
         final ListView lv = (ListView) findViewById(R.id.listView1);
@@ -133,7 +135,7 @@ public class WeekActivity extends AppCompatActivity {
         //tell user they have nothing to sign for
         if(currentSigned && missedwWeeks.isEmpty()){
             Intent intent = new Intent(WeekActivity.this, MainActivity.class);
-            Toast.makeText(getApplicationContext(), "Nothing To Sign For", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Signature Up to Date", Toast.LENGTH_LONG).show();
             startActivity(intent);
         }
 

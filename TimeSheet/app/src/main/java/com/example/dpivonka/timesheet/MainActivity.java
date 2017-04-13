@@ -98,10 +98,8 @@ public class MainActivity extends AppCompatActivity {
         //weekly email system activation
         EmailSystem.SetAlarm(getApplicationContext());
         logo = (ImageView) findViewById(R.id.uml_image);
-        logo.setImageResource(R.drawable.uml_logo);
+        logo.setImageResource(R.drawable.uml);
 
-        logo2 = (ImageView) findViewById(R.id.uml_image2);
-        logo2.setImageResource(R.drawable.uml_logo2);
 
         //listener for next button
         mNextButton.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         ii.putExtra("userName", mNameEditText.getText().toString());
                         startActivity(ii);
                     }else{
-                        Toast.makeText(getApplicationContext(), "Invalid Name Use Autocomplete", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Invalid Name. Use Autocomplete.", Toast.LENGTH_SHORT).show();
                     }
             }
         });
