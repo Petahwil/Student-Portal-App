@@ -22,14 +22,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.opencsv.CSVWriter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.enricocandino.androidmail.MailSender;
+import it.enricocandino.androidmail.model.Attachment;
 import it.enricocandino.androidmail.model.Mail;
 import it.enricocandino.androidmail.model.Recipient;
 
@@ -170,10 +176,20 @@ public class MainActivity extends AppCompatActivity {
                             case 0:
                                 System.out.println("0");
                                 //send this semester
+                                try {
+                                    EmailCSV();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 break;
                             case 1:
                                 System.out.println("1");
                                 //send last semester
+                                try {
+                                    EmailCSV();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 break;
                             default:
                                 System.out.println("-1");
@@ -207,7 +223,76 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private void EmailCSV() throws IOException {
+        ArrayList<String> signed = new ArrayList<>();
+        ArrayList<String> notsigned = new ArrayList<>();
 
+        //filter users who signed from users who didn't.
+        for (User user : userList) {
+            if(user.signed){
+                signed.add(user.getUsername());
+            }else{
+                notsigned.add(user.getUsername());
+            }
+        }
+
+        //create and populate body of email.
+        String email = "Not Signed\n\n";
+
+        for (String s : notsigned) {
+            email += s+"\n";
+        }
+
+        email += "\n\nSigned\n\n";
+
+        for (String s : signed) {
+            email += s+"\n";
+        }
+
+        File f = new File(getCacheDir(),File.separator+"timeSheetCSV/");
+        f.mkdirs();
+        String fname = "Filename.csv";
+        File file = new File (f, fname);
+        if (file.exists ()) file.delete ();
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        CSVWriter writer = new CSVWriter(new FileWriter(file.toString()));
+
+        List<String[]> data = new ArrayList<String[]>();
+        data.add(new String[] {"Signed", "Not Signed"});
+        int i = 0;
+        while (i < signed.size()){
+            data.add(new String[] {signed.get(i)});
+            i++;
+        }
+//data.add(new String[] {notsigned.toString()});
+
+        writer.writeAll(data);
+
+        writer.close();
+
+//build and send email.
+        MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
+        Mail.MailBuilder builder = new Mail.MailBuilder();
+        Mail mail = builder
+                .setSender("timesheetautoemail@gmail.com")
+                //dpivonka@comcast.net
+                .addRecipient(new Recipient("Petahwil@gmail.com"))
+                .setSubject("Weekly Signatures")
+                .setText("testing auto email system\n\n" + email)
+                .addAttachment(new Attachment(file.toString(), "Filename.csv"))
+                .build();
+        mailSender.sendMail(mail);
+
+
+
+
+        //endregion
+}
     /**
      * Sends email to admin showing which users have signed in for the
      * week and which users have not.
