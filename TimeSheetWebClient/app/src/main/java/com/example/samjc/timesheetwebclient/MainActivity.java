@@ -269,6 +269,12 @@ public class MainActivity extends AppCompatActivity {
             data.add(new String[] {signed.get(i)});
             i++;
         }
+        i = 0;
+        while (i < notsigned.size()){
+          //  writer.writeNext(new String[] {notsigned.get(i)});
+            data.add(new String[] {" ", notsigned.get(i)});
+            i++;
+        }
 //data.add(new String[] {notsigned.toString()});
 
         writer.writeAll(data);
