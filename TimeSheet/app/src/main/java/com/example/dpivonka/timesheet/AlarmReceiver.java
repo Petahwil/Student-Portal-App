@@ -88,7 +88,7 @@ public class AlarmReceiver extends BroadcastReceiver{
             //check day
             switch (day){
                 case Calendar.FRIDAY:
-                    EmailSystem.EmailAdmin(userList);
+                    EmailSystem.EmailAdmin(userList, data.getEmail());
                     break;
                 case Calendar.THURSDAY:
                     EmailSystem.EmailReminder(userList);

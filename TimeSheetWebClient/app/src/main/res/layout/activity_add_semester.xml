@@ -12,44 +12,109 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.samjc.timesheetwebclient.AddSemesterActivity">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Semester Start:"
-            android:textSize="@dimen/text_size"/>
+            android:orientation="horizontal">
 
-        <EditText
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Semester Start:"
+                android:textSize="@dimen/text_size"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="9"
+                android:id="@+id/start_date_month_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="2"
+                android:id="@+id/start_date_day_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/20"
+                android:textSize="@dimen/text_size"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="17"
+                android:id="@+id/start_date_year_edit"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="9"
-            android:id="@+id/start_date_month_edit"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Semester End:"
+                android:textSize="@dimen/text_size" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="9"
+                android:id="@+id/end_date_month_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="2"
+                android:id="@+id/end_date_day_edit"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/20"
+                android:textSize="@dimen/text_size"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="17"
+                android:id="@+id/end_date_year_edit"/>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/edit_semester_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="/"/>
-        <EditText
-            android:layout_width="wrap_content"
+            android:text='"Change Current Semseters Dates"' />
+
+        <Button
+            android:id="@+id/new_semester_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="2"
-            android:id="@+id/start_date_day_edit"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="/20"
-            android:textSize="@dimen/text_size"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="17"
-            android:id="@+id/start_date_year_edit"/>
+            android:text='"Create New Semester"' />
 
     </LinearLayout>
 
@@ -57,43 +122,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_marginTop="150dp">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Semester End:"
-            android:textSize="@dimen/text_size" />
+            android:text="Change Admin Email"/>
 
         <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/email_change"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="9"
-            android:id="@+id/end_date_month_edit"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="/"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="2"
-            android:id="@+id/end_date_day_edit"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="/20"
-            android:textSize="@dimen/text_size"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="17"
-            android:id="@+id/end_date_year_edit"/>
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:visibility="visible" />
 
+        <Button
+            android:id="@+id/email_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text='"enter"' />
 
     </LinearLayout>
 

@@ -51,6 +51,9 @@ public class AddSemesterActivity extends AppCompatActivity{
     EditText endDateEditDay;
     EditText endDateEditYear;
 
+    EditText emailEdit;
+    Button emailChange;
+
     String startDate;
     String endDate;
 
@@ -59,7 +62,7 @@ public class AddSemesterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_semester);
 
-        //set up Firebase properties
+        //set up Firebase properties.
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
 
@@ -69,6 +72,9 @@ public class AddSemesterActivity extends AppCompatActivity{
         endDateEditMonth = (EditText) findViewById(R.id.end_date_month_edit);
         endDateEditDay = (EditText) findViewById(R.id.end_date_day_edit);
         endDateEditYear = (EditText) findViewById(R.id.end_date_year_edit);
+
+        emailEdit = (EditText) findViewById(R.id.email_change);
+        emailChange = (Button) findViewById(R.id.email_button);
 
         //initalize tinyDB
         tinydb = new TinyDB(getApplicationContext());
@@ -81,6 +87,34 @@ public class AddSemesterActivity extends AppCompatActivity{
         } else {
             data.setActive("fall");
         }
+        emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+
+        emailChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.setEmail(emailEdit.getText().toString());
+
+                mEmployeeDatabaseReference.child("Data").setValue(data);
+
+                emailEdit.setText("");
+                emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+
+            }
+        });
+
+
+//        how to create a new semester
+//
+//        change active field in data class
+//
+//        set non-active semester to new semester object containing the following
+//
+//        current week = 0
+//        employees should be empty
+//        set start and end dates
+//        calculate number of weeks
+//        create list of weeks each week needs it enddate set calculate that date based off start and enddate
+
     }
 
     @Override
@@ -94,6 +128,12 @@ public class AddSemesterActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
+
+                if (data.getActive().equals("Fall")) {
+                    data.setActive("Spring");
+                } else {
+                    data.setActive("Fall");
+                }
 
                 int startMonth = Integer.parseInt(startDateEditMonth.getText().toString());
                 int startDay = Integer.parseInt(startDateEditDay.getText().toString());
