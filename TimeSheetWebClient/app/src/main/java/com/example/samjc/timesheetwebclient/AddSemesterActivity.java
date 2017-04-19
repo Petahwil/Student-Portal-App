@@ -30,6 +30,9 @@ import java.util.logging.Logger;
 
 public class AddSemesterActivity extends AppCompatActivity{
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mEmployeeDatabaseReference;
+
     private Data data;
     private TinyDB tinydb;
 
@@ -40,6 +43,9 @@ public class AddSemesterActivity extends AppCompatActivity{
     EditText endDateEditDay;
     EditText endDateEditYear;
 
+    EditText emailEdit;
+    Button emailChange;
+
     String startDate;
     String endDate;
 
@@ -48,6 +54,10 @@ public class AddSemesterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_semester);
 
+        //set up Firebase properties.
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
+
         startDateEditMonth = (EditText) findViewById(R.id.start_date_month_edit);
         startDateEditDay = (EditText) findViewById(R.id.start_date_day_edit);
         startDateEditYear = (EditText) findViewById(R.id.start_date_year_edit);
@@ -55,17 +65,30 @@ public class AddSemesterActivity extends AppCompatActivity{
         endDateEditDay = (EditText) findViewById(R.id.end_date_day_edit);
         endDateEditYear = (EditText) findViewById(R.id.end_date_year_edit);
 
+        emailEdit = (EditText) findViewById(R.id.email_change);
+        emailChange = (Button) findViewById(R.id.email_button);
+
         //initalize tinyDB
         tinydb = new TinyDB(getApplicationContext());
 
         //get data object
         data = (Data) tinydb.getObject("data", Data.class);
 
-        if (data.getActive().equals("Fall")) {
-            data.setActive("Spring");
-        } else {
-            data.setActive("Fall");
-        }
+        emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+
+        emailChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.setEmail(emailEdit.getText().toString());
+
+                mEmployeeDatabaseReference.child("Data").setValue(data);
+
+                emailEdit.setText("");
+                emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+
+            }
+        });
+
 
 //        how to create a new semester
 //
@@ -92,6 +115,12 @@ public class AddSemesterActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_save:
+
+                if (data.getActive().equals("Fall")) {
+                    data.setActive("Spring");
+                } else {
+                    data.setActive("Fall");
+                }
 
                 int startMonth = Integer.parseInt(startDateEditMonth.getText().toString());
                 int startDay = Integer.parseInt(startDateEditDay.getText().toString());

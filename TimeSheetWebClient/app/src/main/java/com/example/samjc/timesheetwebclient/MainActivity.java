@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                                 out.println("0");
                                 //send this semester
                                 try {
-                                    EmailCSV(userList,weekList);
+                                    EmailCSV(userList,weekList, data.getEmail());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                                 out.println("1");
                                 //send last semester
                                 try {
-                                    EmailCSV(userListNonA, weekListNonA);
+                                    EmailCSV(userListNonA, weekListNonA, data.getEmail());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void EmailCSV(ArrayList<User> userList, ArrayList<Week> weekList) throws IOException {
+    private void EmailCSV(ArrayList<User> userList, ArrayList<Week> weekList, String AdminEmail) throws IOException {
         ArrayList<String> signed = new ArrayList<>();
         ArrayList<String> notsigned = new ArrayList<>();
 
@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
         Mail mail = builder
                 .setSender("timesheetautoemail@gmail.com")
                 //dpivonka@comcast.net
-                .addRecipient(new Recipient("Petahwil@gmail.com"))
+                .addRecipient(new Recipient(AdminEmail))
                 .setSubject("Weekly Signatures")
                 .setText("testing auto email system\n\n" + email)
                 .addAttachment(new Attachment(file.toString(), "Filename.csv"))

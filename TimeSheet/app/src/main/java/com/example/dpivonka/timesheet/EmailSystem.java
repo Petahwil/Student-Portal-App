@@ -35,7 +35,7 @@ public class EmailSystem {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, pendingIntent);
     }
 
-    static void EmailAdmin(ArrayList<User> userList){
+    static void EmailAdmin(ArrayList<User> userList, String Email){
         //lists to hold names of users
         ArrayList<String> signed = new ArrayList<>();
         ArrayList<String> notsigned = new ArrayList<>();
@@ -69,7 +69,7 @@ public class EmailSystem {
         Mail.MailBuilder builder = new Mail.MailBuilder();
         Mail mail = builder
                 .setSender("timesheetautoemail@gmail.com")
-                .addRecipient(new Recipient("dpivonka@comcast.net"))
+                .addRecipient(new Recipient(email))
                 .setSubject("Weekly Signatures")
                 .setText(email)
                 .build();
