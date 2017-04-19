@@ -32,6 +32,15 @@ import java.util.logging.Logger;
 
 public class AddSemesterActivity extends AppCompatActivity{
 
+    /**
+     * The {@link FirebaseDatabase} holding the Firebase database.
+     */
+    private FirebaseDatabase mFirebaseDatabase;
+    /**
+     * The {@link DatabaseReference} to the employees in the Firebase database.
+     */
+    private DatabaseReference mEmployeeDatabaseReference;
+
     private Data data;
     private TinyDB tinydb;
 
@@ -50,6 +59,10 @@ public class AddSemesterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_semester);
 
+        //set up Firebase properties
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
+
         startDateEditMonth = (EditText) findViewById(R.id.start_date_month_edit);
         startDateEditDay = (EditText) findViewById(R.id.start_date_day_edit);
         startDateEditYear = (EditText) findViewById(R.id.start_date_year_edit);
@@ -63,10 +76,10 @@ public class AddSemesterActivity extends AppCompatActivity{
         //get data object
         data = (Data) tinydb.getObject("data", Data.class);
 
-        if (data.getActive().equals("Fall")) {
-            data.setActive("Spring");
+        if (data.getActive().equals("fall")) {
+            data.setActive("spring");
         } else {
-            data.setActive("Fall");
+            data.setActive("fall");
         }
     }
 
@@ -173,12 +186,12 @@ public class AddSemesterActivity extends AppCompatActivity{
                         Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
-                    int numWeeks = end.getWeekYear() - start.getWeekYear();
+                    int numWeeks = end.get(Calendar.WEEK_OF_YEAR) - start.get(Calendar.WEEK_OF_YEAR);
 
                     ArrayList<Week> weeks = new ArrayList<Week>();
                     Calendar tempCal = start;
                     tempCal.add(Calendar.DATE, Calendar.FRIDAY - tempCal.get(Calendar.DAY_OF_WEEK) - 7);
-                    if (tempCal.before(end)) {
+                    while (tempCal.before(end)) {
                         start.add(Calendar.DATE, 7);
                         weeks.add(new Week(sdf.format(tempCal.getTime())));
                     }
@@ -189,6 +202,8 @@ public class AddSemesterActivity extends AppCompatActivity{
                     data.ActiveSemester().setCurrentWeek(0);
                     data.ActiveSemester().employees.clear();
                     data.ActiveSemester().numWeeks = numWeeks;
+
+                    mEmployeeDatabaseReference.child("Data").setValue(data);
 
                     startActivity(new Intent(this, MainActivity.class));
                 }
