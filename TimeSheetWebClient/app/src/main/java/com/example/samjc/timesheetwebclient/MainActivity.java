@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                                 out.println("0");
                                 //send this semester
                                 try {
-                                    EmailCSV(userList,weekList);
+                                    EmailCSV(userList, weekList);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 notsigned.add(user.getCode());
             }
         }
-// sets up a lsit over user names and if they have signed in for that week
+// sets up a list of user names and if they have signed in for that week
         ArrayList<String> signed2 = new ArrayList<>();
         int empNum = 0;
         int count = 1;
@@ -309,10 +309,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CSVWriter writer = new CSVWriter(new FileWriter(file.toString()));
-// setting up strings to go into coloms
+// setting up strings to go into columns
         List<String[]> data = new ArrayList<String[]>();
         int i = 1;
         int k = 5;
+// setting up header line
         String [] firstLine = new String[] {"Name", "Email", "Advisor","Ta/Ra", "HR ACCT Code","","","","","","","","","","","","","","",""};
         while (i <= weekCnt-2){
             firstLine[k] = "Week " + i;
@@ -373,9 +374,6 @@ public class MainActivity extends AppCompatActivity {
                 .addAttachment(new Attachment(file.toString(), "Filename.csv"))
                 .build();
         mailSender.sendMail(mail);
-
-
-
 
         //endregion
 }
