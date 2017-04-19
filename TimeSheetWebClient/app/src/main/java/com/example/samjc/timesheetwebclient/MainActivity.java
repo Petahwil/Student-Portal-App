@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<User> userList = new ArrayList<>();
     //new
     private ArrayList<Week> weekList = new ArrayList<>();
+    private ArrayList<User> userListNonA = new ArrayList<>();
+    private ArrayList<Week> weekListNonA = new ArrayList<>();
     /**
      * The {@link ListView} that displays all of the users.
      */
@@ -95,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
                    weekList.add(w);
                 }
 
+                for(User u:data.NonActiveSemester().getEmployees()){
+                    userListNonA.add(u);
+                }
+                sortUsers();
+
+                for(Week w:data.NonActiveSemester().getWeeks()){
+                    weekListNonA.add(w);
+
+                }
 
 
                 adapter.notifyDataSetChanged();
@@ -183,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                                 out.println("0");
                                 //send this semester
                                 try {
-                                    EmailCSV();
+                                    EmailCSV(userList,weekList);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -192,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                                 out.println("1");
                                 //send last semester
                                 try {
-                                    EmailCSV();
+                                    EmailCSV(userListNonA, weekListNonA);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -229,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private void EmailCSV() throws IOException {
+    private void EmailCSV(ArrayList<User> userList, ArrayList<Week> weekList) throws IOException {
         ArrayList<String> signed = new ArrayList<>();
         ArrayList<String> notsigned = new ArrayList<>();
 
