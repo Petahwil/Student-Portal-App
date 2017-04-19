@@ -1,6 +1,5 @@
 package com.example.samjc.timesheetwebclient;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -9,18 +8,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.opencsv.CSVWriter;
 
@@ -30,14 +25,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import it.enricocandino.androidmail.MailSender;
 import it.enricocandino.androidmail.model.Attachment;
 import it.enricocandino.androidmail.model.Mail;
 import it.enricocandino.androidmail.model.Recipient;
+
+import static java.lang.System.out;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ArrayList<User>} that holds all users in database.
      */
     private ArrayList<User> userList = new ArrayList<>();
+    //new
+    private ArrayList<Week> weekList = new ArrayList<>();
     /**
      * The {@link ListView} that displays all of the users.
      */
@@ -85,18 +82,27 @@ public class MainActivity extends AppCompatActivity {
         mEmployeeDatabaseReference.addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot snapshot) {
                 userList.clear();
+                weekList.clear();
                 data = snapshot.child("Data").getValue(Data.class);
 
                 for(User u:data.ActiveSemester().getEmployees()){
                     userList.add(u);
                 }
                 sortUsers();
+//new creating weeks list
+
+                for(Week w:data.ActiveSemester().getWeeks()){
+                   weekList.add(w);
+                }
+
+
+
                 adapter.notifyDataSetChanged();
 
                 tinydb.putObject("data", data);
             }
             public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getMessage());
+                out.println("The read failed: " + databaseError.getMessage());
             }
         });
 
@@ -174,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                System.out.println("0");
+                                out.println("0");
                                 //send this semester
                                 try {
                                     EmailCSV();
@@ -183,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 1:
-                                System.out.println("1");
+                                out.println("1");
                                 //send last semester
                                 try {
                                     EmailCSV();
@@ -192,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 break;
                             default:
-                                System.out.println("-1");
+                                out.println("-1");
                                 break;
                         }
                     }
@@ -231,8 +237,39 @@ public class MainActivity extends AppCompatActivity {
         for (User user : userList) {
             if(user.signed){
                 signed.add(user.getUsername());
+                signed.add(user.getEmail());
+                signed.add(user.getAdvisor());
+                signed.add(user.getTa_ra());
+                signed.add(user.getCode());
             }else{
                 notsigned.add(user.getUsername());
+                notsigned.add(user.getEmail());
+                notsigned.add(user.getAdvisor());
+                notsigned.add(user.getTa_ra());
+                notsigned.add(user.getCode());
+            }
+        }
+// sets up a lsit over user names and if they have signed in for that week
+        ArrayList<String> signed2 = new ArrayList<>();
+        int empNum = 0;
+        int count = 1;
+        int weekCnt = 2;
+        for (Week week : weekList){
+            for (User u : week.getEmployees()){
+                empNum = week.getEmployees().size();
+                if(u.signed) {
+                    signed2.add(u.getUsername());
+                    signed2.add("true");
+                }
+                else{
+                    signed2.add(u.getUsername());
+                    signed2.add("false");
+                }
+                if (count == empNum){
+                    count = 0;
+                    weekCnt++;
+                }
+                count ++;
             }
         }
 
@@ -248,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         for (String s : signed) {
             email += s+"\n";
         }
-
+// creating file
         File f = new File(getCacheDir(),File.separator+"timeSheetCSV/");
         f.mkdirs();
         String fname = "Filename.csv";
@@ -261,21 +298,53 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CSVWriter writer = new CSVWriter(new FileWriter(file.toString()));
-
+// setting up strings to go into coloms
         List<String[]> data = new ArrayList<String[]>();
-        data.add(new String[] {"Signed", "Not Signed"});
-        int i = 0;
-        while (i < signed.size()){
-            data.add(new String[] {signed.get(i)});
+        int i = 1;
+        int k = 5;
+        String [] firstLine = new String[] {"Name", "Email", "Advisor","Ta/Ra", "HR ACCT Code","","","","","","","","","","","","","","",""};
+        while (i <= weekCnt-2){
+            firstLine[k] = "Week " + i;
             i++;
+            k++;
         }
+        data.add(firstLine);
+        i = 0;
+        int j = 0;
+        k = 5;
+        while (i < signed.size()){
+            // setting up there initial info
+            String[] info = {signed.get(i), signed.get(i + 1), signed.get(i + 2), signed.get(i + 3), signed.get(i + 4),"","","","","","","","","","","","","","",""};
+           //loop to put in there week sign status data
+            while (j < signed2.size()){
+                if (signed.get(i).equals(signed2.get(j))) {
+                    info[k] = signed2.get(j+1);
+                    k++;
+                }
+                j = j+2;
+            }
+            j = 0;
+            data.add(info);
+            i += 5;
+        }
+        j = 0;
         i = 0;
         while (i < notsigned.size()){
-          //  writer.writeNext(new String[] {notsigned.get(i)});
-            data.add(new String[] {" ", notsigned.get(i)});
-            i++;
+            k = 5;
+            // setting up there initial info
+            String[] info = {notsigned.get(i), notsigned.get(i + 1), notsigned.get(i + 2), notsigned.get(i + 3), notsigned.get(i + 4),"","","","","","","","","","","","","","",""};
+            //loop to put in there week sign status data
+            while (j < signed2.size()){
+                if (notsigned.get(i).equals(signed2.get(j))) {
+                    info[k] = signed2.get(j+1);
+                    k++;
+                }
+                j = j+2;
+            }
+            j = 0;
+            data.add(info);
+            i = i+5;
         }
-//data.add(new String[] {notsigned.toString()});
 
         writer.writeAll(data);
 
@@ -338,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
                 .setSubject("Weekly Signatures")
                 .setText("testing auto email system\n\n"+email)
                 .build();
-        mailSender.sendMail(mail);
+        //mailSender.sendMail(mail);
 
         //reset all signed values for this week now that the email has sent.
         mEmployeeDatabaseReference.removeValue();
@@ -361,6 +430,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;
     }
-
     //endregion
 }
