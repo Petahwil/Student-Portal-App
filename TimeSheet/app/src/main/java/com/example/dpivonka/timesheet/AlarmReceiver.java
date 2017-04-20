@@ -36,7 +36,7 @@ public class AlarmReceiver extends BroadcastReceiver{
         Data data = (Data) tinydb.getObject("data", Data.class);
 
         //check what week it is and update if nessasary
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
         Date endDate = null;
         try {
             endDate = sdf.parse(data.ActiveSemester().weeks.get(data.ActiveSemester().currentWeek).getEndDate());
@@ -83,19 +83,26 @@ public class AlarmReceiver extends BroadcastReceiver{
         int day = calendar.get(Calendar.DAY_OF_WEEK);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
-        //if the hour is 6pm
-        if(hour == 18){
-            //check day
-            switch (day){
-                case Calendar.FRIDAY:
-                    EmailSystem.EmailAdmin(userList, data.getEmail());
-                    break;
-                case Calendar.THURSDAY:
-                    EmailSystem.EmailReminder(userList);
-                    break;
-                default:
-                    //No task scheduled for this day
+        //if we are between start and end date
+        try {
+            if(calendar.after(sdf.parse(data.ActiveSemester().getStartdate())) && calendar.before(sdf.parse(data.ActiveSemester().enddate))) {
+                //if the hour is 6pm
+                if (hour == 18) {
+                    //check day
+                    switch (day) {
+                        case Calendar.FRIDAY:
+                            EmailSystem.EmailAdmin(userList, data.getEmail());
+                            break;
+                        case Calendar.THURSDAY:
+                            EmailSystem.EmailReminder(userList);
+                            break;
+                        default:
+                            //No task scheduled for this day
+                    }
+                }
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 }

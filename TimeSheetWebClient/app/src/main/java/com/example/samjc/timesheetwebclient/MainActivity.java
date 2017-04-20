@@ -370,74 +370,16 @@ public class MainActivity extends AppCompatActivity {
                 //dpivonka@comcast.net
                 .addRecipient(new Recipient(AdminEmail))
                 .setSubject("Weekly Signatures")
-                .setText("testing auto email system\n\n" + email)
+                .setText("Semester Data")
                 .addAttachment(new Attachment(file.toString(), "Filename.csv"))
                 .build();
         mailSender.sendMail(mail);
 
-        //endregion
-}
-    /**
-     * Sends email to admin showing which users have signed in for the
-     * week and which users have not.
-     */
-    private void EmailAdmin(){
-        ArrayList<String> signed = new ArrayList<>();
-        ArrayList<String> notsigned = new ArrayList<>();
-
-        //filter users who signed from users who didn't.
-        for (User user : userList) {
-            if(user.signed){
-                signed.add(user.getUsername());
-            }else{
-                notsigned.add(user.getUsername());
-            }
-        }
-
-        //create and populate body of email.
-        String email = "Not Signed\n\n";
-
-        for (String s : notsigned) {
-            email += s+"\n";
-        }
-
-        email += "\n\nSigned\n\n";
-
-        for (String s : signed) {
-            email += s+"\n";
-        }
-
-        //build and send email.
-        MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
-        Mail.MailBuilder builder = new Mail.MailBuilder();
-        Mail mail = builder
-                .setSender("timesheetautoemail@gmail.com")
-                .addRecipient(new Recipient("dpivonka@comcast.net"))
-                .setSubject("Weekly Signatures")
-                .setText("testing auto email system\n\n"+email)
-                .build();
-        //mailSender.sendMail(mail);
-
-        //reset all signed values for this week now that the email has sent.
-        mEmployeeDatabaseReference.removeValue();
-        mEmployeeDatabaseReference.setValue("employees");
-        mEmployeeDatabaseReference.child("employees");
-        for (User user : userList) {
-            user.signed=false;
-            mEmployeeDatabaseReference.push().setValue(user);
-        }
 
         Toast.makeText(getApplicationContext(),
                 "Email Sent", Toast.LENGTH_SHORT).show();
-    }
 
-    User findUserByName(String name) {
-        for (User u:data.ActiveSemester().getEmployees()) {
-            if (name.equals(u.getUsername())) {
-                return u;
-            }
-        }
-        return null;
-    }
-    //endregion
+        //endregion
+}
+
 }

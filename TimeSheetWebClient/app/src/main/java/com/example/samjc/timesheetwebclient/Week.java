@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Week {
     public String endDate;
     public ArrayList<User> employees = new ArrayList<>();
-    public boolean signed;
+
 
     public Week(){
 
@@ -23,11 +23,7 @@ public class Week {
         this.endDate = endDate;
     }
 
-    public Week(String startDate, ArrayList<User> employees, boolean signed) {
-        this.endDate = startDate;
-        this.employees = employees;
-        this.signed = signed;
-    }
+
 
     public String getEndDate() {
         return endDate;
@@ -45,7 +41,5 @@ public class Week {
         this.employees = employees;
     }
 
-    public boolean isSigned() {
-        return signed;
-    }
+
 }
