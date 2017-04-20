@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -47,7 +44,6 @@ public class AddUserActivity extends AppCompatActivity {
      */
     AutoCompleteTextView emailEdit;
     RadioGroup positionGroup;
-    RadioButton positionButton;
     AutoCompleteTextView facultyEdit;
     EditText accountEdit;
     ArrayAdapter<String> nameAdapter;
@@ -89,6 +85,7 @@ public class AddUserActivity extends AppCompatActivity {
             }
         });
 
+        //init lists
         nameList = new ArrayList<String>();
         emailList = new ArrayList<String>();
         facultyList = new ArrayList<String>();
@@ -100,10 +97,12 @@ public class AddUserActivity extends AppCompatActivity {
         facultyEdit = (AutoCompleteTextView) findViewById(R.id.faculty_edit);
         accountEdit = (EditText) findViewById(R.id.account_edit);
 
+        //autocomplete adapters
         nameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nameList);
         emailAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, emailList);
         facultyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, facultyList);
 
+        //init automcomplete textedits
         nameEdit.setAdapter(nameAdapter);
         emailEdit.setAdapter(emailAdapter);
         facultyEdit.setAdapter(facultyAdapter);

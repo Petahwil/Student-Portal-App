@@ -1,8 +1,5 @@
 package com.example.samjc.timesheetwebclient;
 
-
-import android.content.Intent;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -68,6 +65,7 @@ public class AddSemesterActivity extends AppCompatActivity{
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
 
+        //set up views
         startDateEditMonth = (EditText) findViewById(R.id.start_date_month_edit);
         startDateEditDay = (EditText) findViewById(R.id.start_date_day_edit);
         startDateEditYear = (EditText) findViewById(R.id.start_date_year_edit);
@@ -91,12 +89,12 @@ public class AddSemesterActivity extends AppCompatActivity{
         //get data object
         data = (Data) tinydb.getObject("data", Data.class);
 
-        //init semester data
+        //init semester data text views
         startDateText.setText("Start Date: " + data.ActiveSemester().getStartdate());
         endDateText.setText("End Date: " + data.ActiveSemester().getEnddate());
         numWeeksText.setText("Number of Weeks: " + data.ActiveSemester().numWeeks);
 
-        //init email
+        //init email text view
         emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
 
         //email change listener
@@ -129,10 +127,10 @@ public class AddSemesterActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
+                //check if semester has started
                 Calendar now = Calendar.getInstance();
                 Date start;
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
-
                 try {
                     start = sdf.parse(data.ActiveSemester().getStartdate());
 
