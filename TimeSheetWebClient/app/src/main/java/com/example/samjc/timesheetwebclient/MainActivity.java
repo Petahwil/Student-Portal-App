@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
                     userList.add(u);
                 }
                 sortUsers();
-//new creating weeks list
 
+                //new creating weeks list
                 for(Week w:data.ActiveSemester().getWeeks()){
                    weekList.add(w);
                 }
@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                     weekListNonA.add(w);
 
                 }
-
 
                 adapter.notifyDataSetChanged();
 
@@ -149,13 +148,11 @@ public class MainActivity extends AppCompatActivity {
 
                         mEmployeeDatabaseReference.child("Data").setValue(data);
 
-
-                        //adapter = new UserAdapter(MainActivity.this, userList);
-                        //lvMain.setAdapter(adapter);
                         Toast.makeText(getApplicationContext(), "User \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                     }
                 });
+
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

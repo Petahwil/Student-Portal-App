@@ -2,7 +2,6 @@ package com.example.dpivonka.timesheet;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -29,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mEmployeeDatabaseReference;
 
@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         //weekly email system activation
         EmailSystem.SetAlarm(getApplicationContext());
 
+        //set up images
         rh2 = (ImageView) findViewById(R.id.uml_rh2);
         rh2.setImageResource(R.drawable.river_hawk2);
 
@@ -108,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
 
         rh1 = (ImageView) findViewById(R.id.uml_rh1);
         rh1.setImageResource(R.drawable.river_hawk1);
-
 
         //listener for next button
         mNextButton.setOnClickListener(new View.OnClickListener() {
