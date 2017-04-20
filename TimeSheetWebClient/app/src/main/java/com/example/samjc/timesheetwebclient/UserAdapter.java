@@ -56,14 +56,14 @@ public class UserAdapter extends ArrayAdapter<User>{
                     R.layout.list_item_info, parent, false);
         }
 
-        //get the item from the list and cast it to type User.
+        // Get the item from the list and cast it to type User.
         currentUser = (User) getItem(position);
 
-        //initialize UI fields.
+        // Initialize UI fields.
         nameView = (TextView) listItemView.findViewById(R.id.name_view);
         emailView = (TextView) listItemView.findViewById(R.id.email_view);
 
-        //set text in UI fields.
+        // Set text in UI fields.
         nameView.setText(currentUser.username);
         emailView.setText(currentUser.email);
 
