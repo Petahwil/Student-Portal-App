@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
@@ -103,12 +104,17 @@ public class AddSemesterActivity extends AppCompatActivity{
         emailChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data.setEmail(emailEdit.getText().toString());
+                String email = emailEdit.getText().toString();
+                if ((TextUtils.isEmpty(email)) || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(getApplicationContext(), "Invalid or empty \"Email Address\" field.", Toast.LENGTH_LONG).show();
+                } else {
+                    data.setEmail(emailEdit.getText().toString());
 
-                mEmployeeDatabaseReference.child("Data").setValue(data);
+                    mEmployeeDatabaseReference.child("Data").setValue(data);
 
-                emailEdit.setText("");
-                emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+                    emailEdit.setText("");
+                    emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+                }
             }
         });
 
