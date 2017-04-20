@@ -116,10 +116,11 @@
             android:textSize="@dimen/text_size"
             android:text="HR Account Code:"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:inputType="textPersonName"
+            android:imeOptions="actionDone"
             android:id="@+id/account_edit"/>
 
     </LinearLayout>

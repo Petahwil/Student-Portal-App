@@ -129,10 +129,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //delete user from database
-
-                        //reset adapter and apply to lvMain to update list.
-                        adapter.notifyDataSetChanged();
-
                         int x;
                         for(x = 0; x < data.ActiveSemester().employees.size(); x++){
                             if(data.ActiveSemester().employees.get(x).getUsername().equals(user.getUsername())){
@@ -147,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         mEmployeeDatabaseReference.child("Data").setValue(data);
+
+                        //reset adapter and apply to lvMain to update list.
+                        adapter.notifyDataSetChanged();
 
                         Toast.makeText(getApplicationContext(), "User \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG).show();
                         dialog.dismiss();
@@ -306,11 +305,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CSVWriter writer = new CSVWriter(new FileWriter(file.toString()));
-// setting up strings to go into columns
+        // setting up strings to go into columns
         List<String[]> data = new ArrayList<String[]>();
         int i = 1;
         int k = 5;
-// setting up header line
+        // setting up header line
         String [] firstLine = new String[] {"Name", "Email", "Advisor","Ta/Ra", "HR ACCT Code","","","","","","","","","","","","","","",""};
         while (i <= weekCnt-2){
             firstLine[k] = "Week " + i;
@@ -359,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
 
         writer.close();
 
-//build and send email.
+        //build and send email.
         MailSender mailSender = new MailSender("timesheetautoemail@gmail.com", "AndroidPass7");
         Mail.MailBuilder builder = new Mail.MailBuilder();
         Mail mail = builder

@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -32,6 +31,9 @@ public class AddUserActivity extends AppCompatActivity {
      * The {@link DatabaseReference} to the employees in the Firebase database.
      */
     private DatabaseReference mEmployeeDatabaseReference;
+    /**
+     * The {@link Data} holding all information for both semesters.
+     */
     Data data;
     //endregion
     //region UI Elements
@@ -43,15 +45,54 @@ public class AddUserActivity extends AppCompatActivity {
      * The {@link AutoCompleteTextView} where user enters email address of the new user.
      */
     AutoCompleteTextView emailEdit;
+    /**
+     * The {@link RadioGroup} containing the TA and RA buttons.
+     */
     RadioGroup positionGroup;
+    /**
+     * The {@link AutoCompleteTextView} where user enters faculty advisor of the new user.
+     */
     AutoCompleteTextView facultyEdit;
-    EditText accountEdit;
+    /**
+     * The {@link AutoCompleteTextView} where users enters account number of the new user.
+     */
+    AutoCompleteTextView accountEdit;
+    //region ADAPTERS
+    /**
+     * The {@link ArrayAdapter<String>} that allows for auto complete in the name field.
+     */
     ArrayAdapter<String> nameAdapter;
+    /**
+     * The {@link ArrayAdapter<String>} that allows for auto complete in the email field.
+     */
     ArrayAdapter<String> emailAdapter;
+    /**
+     * The {@link ArrayAdapter<String>} that allows for auto complete in the faculty field.
+     */
     ArrayAdapter<String> facultyAdapter;
+    /**
+     * The {@link ArrayAdapter<String>} that allows for auto complete in the account field.
+     */
+    ArrayAdapter<String> accountAdapter;
+    //endregion
+    //region LISTS
+    /**
+     * The {@link ArrayList<String>} that holds list of names used for auto completion.
+     */
     ArrayList<String> nameList;
+    /**
+     * The {@link ArrayList<String>} that holds list of emails used for auto completion.
+     */
     ArrayList<String> emailList;
+    /**
+     * The {@link ArrayList<String>} that holds list of faculty used for auto completion.
+     */
     ArrayList<String> facultyList;
+    /**
+     * The {@link ArrayList<String>} that holds list of accounts used for auto completion.
+     */
+    ArrayList<String> accountList;
+    //endregion
     //endregion
     //endregion
 
@@ -72,11 +113,13 @@ public class AddUserActivity extends AppCompatActivity {
                 nameList.clear();
                 emailList.clear();
                 facultyList.clear();
+                accountList.clear();
 
                 for (User u:data.NonActiveSemester().getEmployees()) {
                     nameList.add(u.getUsername());
                     emailList.add(u.getEmail());
                     facultyList.add(u.getAdvisor());
+                    accountList.add(u.getCode());
                 }
 
             }
@@ -89,23 +132,26 @@ public class AddUserActivity extends AppCompatActivity {
         nameList = new ArrayList<String>();
         emailList = new ArrayList<String>();
         facultyList = new ArrayList<String>();
+        accountList = new ArrayList<String>();
 
         //set up UI Element fields
         nameEdit = (AutoCompleteTextView) findViewById(R.id.name_edit);
         emailEdit = (AutoCompleteTextView) findViewById(R.id.email_edit);
         positionGroup = (RadioGroup) findViewById(R.id.rgroup_position);
         facultyEdit = (AutoCompleteTextView) findViewById(R.id.faculty_edit);
-        accountEdit = (EditText) findViewById(R.id.account_edit);
+        accountEdit = (AutoCompleteTextView) findViewById(R.id.account_edit);
 
         //autocomplete adapters
         nameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nameList);
         emailAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, emailList);
         facultyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, facultyList);
+        accountAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, accountList);
 
-        //init automcomplete textedits
+        //init autocomplete textedits
         nameEdit.setAdapter(nameAdapter);
         emailEdit.setAdapter(emailAdapter);
         facultyEdit.setAdapter(facultyAdapter);
+        accountEdit.setAdapter(accountAdapter);
 
     }
 
@@ -170,6 +216,9 @@ public class AddUserActivity extends AppCompatActivity {
      * creates a User object, then adds it to Firebase.
      * @param name The {@link String} holding the name of the new user.
      * @param email The {@link String} holding the email address of the new user.
+     * @param position The {@link String} holding the position (TA/RA) of the new user.
+     * @param faculty The {@link String} holding the faculty advisor of the new user.
+     * @param account The {@link String} holding the account code of the new user.
      */
     private void writeNewUser(String name, String email, String position, String faculty, String account) {
         User user = new User(name, email, position, faculty, account);
