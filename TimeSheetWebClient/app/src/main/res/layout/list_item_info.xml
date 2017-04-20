@@ -3,20 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="5dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textSize="@dimen/text_size"
-        android:paddingTop="10dp"
+        android:textStyle="bold"
+        android:paddingBottom="5dp"
+        android:padding="10dp"
         android:id="@+id/name_view"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textSize="@dimen/text_size"
-        android:paddingBottom="10dp"
+        android:textStyle="italic"
+        android:padding="10dp"
+        android:paddingTop="5dp"
         android:id="@+id/email_view"/>
 
 </LinearLayout>

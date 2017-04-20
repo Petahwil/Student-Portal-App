@@ -42,6 +42,7 @@ public class AddSemesterActivity extends AppCompatActivity{
     TextView startDateText;
     TextView endDateText;
     TextView numWeeksText;
+    TextView currentEmailText;
 
     EditText startDateEditMonth;
     EditText startDateEditDay;
@@ -81,6 +82,8 @@ public class AddSemesterActivity extends AppCompatActivity{
         startDateText = (TextView) findViewById(R.id.start_date);
         endDateText = (TextView) findViewById(R.id.end_date);
         numWeeksText = (TextView) findViewById(R.id.num_weeks);
+        currentEmailText = (TextView) findViewById(R.id.curr_email);
+
 
         semseterDatesButton = (Button) findViewById(R.id.edit_semester_button);
         newSemesterButton = (Button) findViewById(R.id.new_semester_button);
@@ -95,22 +98,7 @@ public class AddSemesterActivity extends AppCompatActivity{
         startDateText.setText("Start Date: " + data.ActiveSemester().getStartdate());
         endDateText.setText("End Date: " + data.ActiveSemester().getEnddate());
         numWeeksText.setText("Number of Weeks: " + data.ActiveSemester().numWeeks);
-
-        //init email
-        emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
-
-        //email change listener
-        emailChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                data.setEmail(emailEdit.getText().toString());
-
-                mEmployeeDatabaseReference.child("Data").setValue(data);
-
-                emailEdit.setText("");
-                emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
-            }
-        });
+        currentEmailText.setText("Admin Email: " + data.getEmail());
 
         //create new semseter listener
         newSemesterButton.setOnClickListener(new View.OnClickListener() {
