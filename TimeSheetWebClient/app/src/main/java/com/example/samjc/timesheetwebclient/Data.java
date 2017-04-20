@@ -6,15 +6,36 @@ package com.example.samjc.timesheetwebclient;
 
 public class Data {
 
+    /**
+     * The {@link String} to determine which semester is active.
+     */
     public String active;
+    /**
+     * The {@link Semester} holding data for the Fall semester.
+     */
     public Semester fall;
+    /**
+     * The {@link Semester} holding data for the Spring semester.
+     */
     public Semester spring;
+    /**
+     * The {@link String} containing the admin's email.
+     */
     public String email;
 
+    /**
+     * Default constructor for {@link Data} object.
+     */
     public Data(){
 
     }
 
+    /**
+     * Constructor for {@link Data} object with parameters.
+     * @param active
+     * @param fall
+     * @param spring
+     */
     public Data(String active, Semester fall, Semester spring) {
         this.active = active;
         this.fall = fall;

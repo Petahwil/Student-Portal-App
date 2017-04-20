@@ -152,7 +152,6 @@ public class AddUserActivity extends AppCompatActivity {
         emailEdit.setAdapter(emailAdapter);
         facultyEdit.setAdapter(facultyAdapter);
         accountEdit.setAdapter(accountAdapter);
-
     }
 
     @Override

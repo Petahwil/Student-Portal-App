@@ -120,11 +120,11 @@ public class AddSemesterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_semester);
 
-        //set up Firebase properties.
+        // Set up Firebase properties.
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
 
-        //set up views
+        // Set up UI elements.
         startDateEditMonth = (EditText) findViewById(R.id.start_date_month_edit);
         startDateEditDay = (EditText) findViewById(R.id.start_date_day_edit);
         startDateEditYear = (EditText) findViewById(R.id.start_date_year_edit);
@@ -140,26 +140,30 @@ public class AddSemesterActivity extends AppCompatActivity{
         numWeeksText = (TextView) findViewById(R.id.num_weeks);
         currentEmailText = (TextView) findViewById(R.id.curr_email);
 
-
         semesterDatesButton = (Button) findViewById(R.id.edit_semester_button);
         newSemesterButton = (Button) findViewById(R.id.new_semester_button);
 
-        //initalize tinyDB
+        // Initialize tinyDB
         tinydb = new TinyDB(getApplicationContext());
 
-        //get data object
+        // Get data object
         data = (Data) tinydb.getObject("data", Data.class);
 
-        //init semester data text views
-        startDateText.setText("Start Date: " + data.ActiveSemester().getStartdate());
-        endDateText.setText("End Date: " + data.ActiveSemester().getEnddate());
-        numWeeksText.setText("Number of Weeks: " + data.ActiveSemester().numWeeks);
-        currentEmailText.setText("Admin Email: " + data.getEmail());
 
-        //init email text view
-        emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+        // Initialize information display.
+        String sDate = "Start Date: " + data.ActiveSemester().getStartdate();
+        String eDate = "End Date: " + data.ActiveSemester().getEnddate();
+        String nWeeks = "Number of Weeks: " + data.ActiveSemester().numWeeks;
+        String cEmail = "Admin Email: " + data.getEmail();
+        startDateText.setText(sDate);
+        endDateText.setText(eDate);
+        numWeeksText.setText(nWeeks);
+        currentEmailText.setText(cEmail);
 
-        //email change listener
+        // Initialize email hint.
+        emailEdit.setHint("Enter Email");
+
+        // Email change listener
         emailChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +181,7 @@ public class AddSemesterActivity extends AppCompatActivity{
             }
         });
 
-        //create new semseter listener
+        // Create new semester
         newSemesterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,9 +192,13 @@ public class AddSemesterActivity extends AppCompatActivity{
                     public void onClick(DialogInterface dialog, int which) {
                         createNewSemester();
 
-                        startDateText.setText("Start Date: " + data.ActiveSemester().getStartdate());
-                        endDateText.setText("End Date: " + data.ActiveSemester().getEnddate());
-                        numWeeksText.setText("Number of Weeks: " + data.ActiveSemester().numWeeks);
+                        // Update information display.
+                        String sDate = "Start Date: " + data.ActiveSemester().getStartdate();
+                        String eDate = "End Date: " + data.ActiveSemester().getEnddate();
+                        String nWeeks = "Number of Weeks: " + data.ActiveSemester().numWeeks;
+                        startDateText.setText(sDate);
+                        endDateText.setText(eDate);
+                        numWeeksText.setText(nWeeks);
 
                         startActivity(new Intent(AddSemesterActivity.this, MainActivity.class));
                     }
@@ -207,7 +215,7 @@ public class AddSemesterActivity extends AppCompatActivity{
             }
         });
 
-        //change current semester dates
+        // Change current semester dates
         semesterDatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,18 +234,23 @@ public class AddSemesterActivity extends AppCompatActivity{
 
                             if(now.before(start)){
                                 changeSemesterDates();
-                            }else{
+                            } else {
                                 Toast.makeText(getApplicationContext(),
-                                        "The semester you are trying to modify has already started. Please create a new semester.", Toast.LENGTH_LONG).show();
+                                        "The semester you are trying to modify has already started." +
+                                                "Please create a new semester.",
+                                        Toast.LENGTH_LONG).show();
                             }
-
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
 
-                        startDateText.setText("Start Date: " + data.ActiveSemester().getStartdate());
-                        endDateText.setText("End Date: " + data.ActiveSemester().getEnddate());
-                        numWeeksText.setText("Number of Weeks: " + data.ActiveSemester().numWeeks);
+                        // Update information display.
+                        String sDate = "Start Date: " + data.ActiveSemester().getStartdate();
+                        String eDate = "End Date: " + data.ActiveSemester().getEnddate();
+                        String nWeeks = "Number of Weeks: " + data.ActiveSemester().numWeeks;
+                        startDateText.setText(sDate);
+                        endDateText.setText(eDate);
+                        numWeeksText.setText(nWeeks);
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -252,8 +265,10 @@ public class AddSemesterActivity extends AppCompatActivity{
         });
     }
 
+    /**
+     * Change dates of current semester.
+     */
     private void changeSemesterDates() {
-
         int startMonth = Integer.parseInt(startDateEditMonth.getText().toString());
         int startDay = Integer.parseInt(startDateEditDay.getText().toString());
         int startYear = Integer.parseInt(startDateEditYear.getText().toString());
@@ -368,6 +383,9 @@ public class AddSemesterActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * Create a new semester with given dates.
+     */
     void createNewSemester(){
         if (data.getActive().equals("Fall")) {
             data.setActive("Spring");
