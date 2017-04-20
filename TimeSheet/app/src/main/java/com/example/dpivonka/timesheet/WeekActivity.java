@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -147,7 +148,19 @@ public class WeekActivity extends AppCompatActivity {
             tv.setVisibility(View.VISIBLE);
 
             for(int x = 0; x < missedwWeeks.size(); x++){
-                modelItems[x] = new Model("Week "+ missedwWeeks.get(x).toString(), 0);
+
+                try {
+                    Date date = sdf.parse(data.ActiveSemester().getWeeks().get(missedwWeeks.get(x)-1).endDate);
+                    Calendar startDate = Calendar.getInstance();
+                    startDate.setTime(date);
+                    startDate.add(Calendar.DAY_OF_WEEK, -4);
+                    modelItems[x] = new Model("Week "+ sdf.format(startDate.getTime()).toString(), 0);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
             }
 
             lv.setAdapter(adapter);
