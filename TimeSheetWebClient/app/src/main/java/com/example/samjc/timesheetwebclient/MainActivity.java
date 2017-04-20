@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
                 .addRecipient(new Recipient(AdminEmail))
                 .setSubject("Weekly Signatures")
                 .setText("Semester Data")
-                .addAttachment(new Attachment(file.toString(), "Filename.csv"))
+                .addAttachment(new Attachment(file.toString(), "Semester.csv"))
                 .build();
         mailSender.sendMail(mail);
 
