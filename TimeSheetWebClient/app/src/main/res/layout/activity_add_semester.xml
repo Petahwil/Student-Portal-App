@@ -31,8 +31,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Current Semester Details"
-                    android:textSize="20sp"
+                    android:text="@string/current_semester_details"
+                    android:textSize="@dimen/text_size"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="italic"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sub_text_size"
                     android:id="@+id/start_date"/>
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="italic"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sub_text_size"
                     android:id="@+id/end_date"/>
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="italic"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sub_text_size"
                     android:id="@+id/num_weeks"/>
 
                 <TextView
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="italic"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/sub_text_size"
                     android:id="@+id/curr_email"/>
 
 
@@ -85,8 +85,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Semester Start:"
-                        android:textSize="20sp"
+                        android:text="@string/semester_start"
+                        android:textSize="@dimen/text_size"
                         android:textStyle="bold"/>
 
                     <EditText
@@ -128,9 +128,9 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Semester End:"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
+                        android:text="@string/semester_end"
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:layout_width="wrap_content"
@@ -166,14 +166,16 @@
                     android:id="@+id/edit_semester_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/sub_text_size"
                     android:layout_marginTop="20dp"
-                    android:text='Change Current Semester Dates' />
+                    android:text="@string/change_current_semester_dates" />
 
                 <Button
                     android:id="@+id/new_semester_button"
                     android:layout_width="match_parent"
+                    android:textSize="@dimen/sub_text_size"
                     android:layout_height="wrap_content"
-                    android:text='Create New Semester' />
+                    android:text="@string/create_new_semester" />
 
             </LinearLayout>
 
@@ -186,17 +188,19 @@
             android:layout_marginTop="25dp">
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Change Admin Email"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:text="@string/update_admin_email"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/email_change"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Email"
+                android:hint="@string/new_admin_email"
+                android:textSize="@dimen/sub_text_size"
                 android:inputType="textEmailAddress"
                 android:visibility="visible" />
 
@@ -204,7 +208,8 @@
                 android:id="@+id/email_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text='Enter' />
+                android:textSize="@dimen/sub_text_size"
+                android:text="@string/update_admin_email" />
 
         </LinearLayout>
 

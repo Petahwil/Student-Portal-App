@@ -40,13 +40,25 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-
 public class TinyDB {
 
+    /**
+     * The {@link SharedPreferences} preferences for the TinyDB.
+     */
     private SharedPreferences preferences;
+    /**
+     * The {@link String} containing the directory for the database.
+     */
     private String DEFAULT_APP_IMAGEDATA_DIRECTORY;
+    /**
+     * The {@link String} containing the last image path for the database.
+     */
     private String lastImagePath = "";
 
+    /**
+     * Constructor for {@link TinyDB} object.
+     * @param appContext The {@link Context} of the app.
+     */
     public TinyDB(Context appContext) {
         preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
     }
@@ -61,15 +73,12 @@ public class TinyDB {
         Bitmap bitmapFromPath = null;
         try {
             bitmapFromPath = BitmapFactory.decodeFile(path);
-
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
 
         return bitmapFromPath;
     }
-
 
     /**
      * Returns the String path of the last saved image
@@ -184,7 +193,7 @@ public class TinyDB {
         return (fileCreated && bitmapCompressed && streamClosed);
     }
 
-    // Getters
+    //region GETTERS
 
     /**
      * Get int value from SharedPreferences at 'key'. If key not found, return 'defaultValue'
@@ -337,9 +346,9 @@ public class TinyDB {
             throw new NullPointerException();
         return value;
     }
-    
-    
-    // Put methods
+    //endregion
+
+    //region PUT METHODS
 
     /**
      * Put int value into SharedPreferences with 'key' and save
@@ -474,6 +483,7 @@ public class TinyDB {
     	}
     	putListString(key, objStrings);
     }
+    //endregion
     
     /**
      * Remove SharedPreferences item with 'key'

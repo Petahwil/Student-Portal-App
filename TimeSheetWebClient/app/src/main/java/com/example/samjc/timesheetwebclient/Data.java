@@ -1,9 +1,5 @@
 package com.example.samjc.timesheetwebclient;
 
-/**
- * Created by dpivonka on 3/23/17.
- */
-
 public class Data {
 
     /**
@@ -32,9 +28,9 @@ public class Data {
 
     /**
      * Constructor for {@link Data} object with parameters.
-     * @param active
-     * @param fall
-     * @param spring
+     * @param active The {@link String} telling which semester is active.
+     * @param fall The {@link Semester} containing information for Fall semester.
+     * @param spring The {@link Semester} containing information for Spring semester.
      */
     public Data(String active, Semester fall, Semester spring) {
         this.active = active;
