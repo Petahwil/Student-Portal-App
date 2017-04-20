@@ -9,6 +9,7 @@ public class Data {
     public String active;
     public Semester fall;
     public Semester spring;
+    public String email;
 
     public Data(){
 
@@ -60,6 +61,14 @@ public class Data {
             return fall;
         }
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

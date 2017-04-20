@@ -72,7 +72,7 @@ public class SignActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         //check what week it is and update if nessasary
-                        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
                         Date endDate = null;
                         try {
                             endDate = sdf.parse(data.ActiveSemester().weeks.get(data.ActiveSemester().currentWeek).getEndDate());

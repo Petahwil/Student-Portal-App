@@ -10,6 +10,7 @@ public class Week {
     public String endDate;
     public ArrayList<User> employees = new ArrayList<>();
 
+
     public Week(){
 
     }
@@ -22,10 +23,7 @@ public class Week {
         this.endDate = endDate;
     }
 
-    public Week(String startDate, ArrayList<User> employees) {
-        this.endDate = startDate;
-        this.employees = employees;
-    }
+
 
     public String getEndDate() {
         return endDate;
@@ -42,4 +40,6 @@ public class Week {
     public void setEmployees(ArrayList<User> employees) {
         this.employees = employees;
     }
+
+
 }

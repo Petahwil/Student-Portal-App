@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 tinydb.putObject("data", data);
+
+
             }
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
