@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
+                   <!-- <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Semester Start:"
@@ -114,7 +114,13 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:hint="YY"
-                        android:id="@+id/start_date_year_edit"/>
+                        android:id="@+id/start_date_year_edit"/>-->
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pick_date"
+                        android:onClick="showDatePickerDialog" />
 
                 </LinearLayout>
 
@@ -164,15 +170,17 @@
 
                 <Button
                     android:id="@+id/edit_semester_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:text='Change Current Semester Dates' />
 
                 <Button
                     android:id="@+id/new_semester_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text='Create New Semester' />
 
             </LinearLayout>
@@ -194,7 +202,7 @@
 
             <EditText
                 android:id="@+id/email_change"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter Email"
                 android:inputType="textEmailAddress"
@@ -202,8 +210,9 @@
 
             <Button
                 android:id="@+id/email_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text='Enter' />
 
         </LinearLayout>

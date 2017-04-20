@@ -12,6 +12,15 @@
     tools:context="com.example.samjc.timesheetwebclient.MainActivity"
     android:weightSum="1">
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Current List of TA/RA's"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textStyle="bold|italic"/>
+
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
