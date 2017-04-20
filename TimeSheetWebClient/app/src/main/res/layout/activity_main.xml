@@ -13,18 +13,11 @@
     android:weightSum="1">
 
     <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/lv_main"
-        android:layout_width="match_parent"
-        android:layout_height="432dp"
         android:layout_weight="0.75">
 
     </ListView>
-
-    <!--<Button-->
-        <!--android:id="@+id/sendmail"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Send Email"-->
-        <!--android:layout_weight=".15"/>-->
 
 </LinearLayout>

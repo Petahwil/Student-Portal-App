@@ -21,9 +21,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:parentActivityName=".MainActivity"
             android:name=".AddUserActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".AddSemesterActivity"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".AddSemesterActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
     </application>
 
 </manifest>

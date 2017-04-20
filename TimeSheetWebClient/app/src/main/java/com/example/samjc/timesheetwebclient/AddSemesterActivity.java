@@ -59,6 +59,7 @@ public class AddSemesterActivity extends AppCompatActivity{
      * The {@link TextView} showing the number of weeks in the current semester.
      */
     TextView numWeeksText;
+    TextView currentEmailText;
 
     /**
      * The {@link EditText} for the start date month.
@@ -137,6 +138,8 @@ public class AddSemesterActivity extends AppCompatActivity{
         startDateText = (TextView) findViewById(R.id.start_date);
         endDateText = (TextView) findViewById(R.id.end_date);
         numWeeksText = (TextView) findViewById(R.id.num_weeks);
+        currentEmailText = (TextView) findViewById(R.id.curr_email);
+
 
         semesterDatesButton = (Button) findViewById(R.id.edit_semester_button);
         newSemesterButton = (Button) findViewById(R.id.new_semester_button);
@@ -151,6 +154,7 @@ public class AddSemesterActivity extends AppCompatActivity{
         startDateText.setText("Start Date: " + data.ActiveSemester().getStartdate());
         endDateText.setText("End Date: " + data.ActiveSemester().getEnddate());
         numWeeksText.setText("Number of Weeks: " + data.ActiveSemester().numWeeks);
+        currentEmailText.setText("Admin Email: " + data.getEmail());
 
         //init email text view
         emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
