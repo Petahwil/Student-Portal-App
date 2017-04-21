@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:textSize="@dimen/sub_text_size"
             android:imeOptions="actionDone"
             android:id="@+id/name_edit"/>
 
@@ -47,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:textSize="@dimen/sub_text_size"
             android:imeOptions="actionDone"
             android:id="@+id/email_edit"/>
 
@@ -61,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"
-            android:text="Position:"/>
+            android:text="@string/position"/>
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -72,12 +74,14 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/sub_text_size"
                 android:text="TA"
                 android:id="@+id/radio_ta"/>
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/sub_text_size"
                 android:text="RA"
                 android:id="@+id/radio_ra"/>
 
@@ -100,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:textSize="@dimen/sub_text_size"
             android:imeOptions="actionDone"
             android:id="@+id/faculty_edit"/>
 
@@ -114,12 +119,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"
-            android:text="HR Account Code:"/>
+            android:text="@string/code"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/sub_text_size"
+            android:imeOptions="actionDone"
             android:id="@+id/account_edit"/>
 
     </LinearLayout>

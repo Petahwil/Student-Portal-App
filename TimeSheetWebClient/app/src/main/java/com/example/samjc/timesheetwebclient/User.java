@@ -1,23 +1,43 @@
 package com.example.samjc.timesheetwebclient;
 
-/**
- * Created by wilsop4 on 3/3/2017.
- */
+public class User extends Object {
 
-public class User extends Object{
-
+    /**
+     * The {@link String} containing the user's name.
+     */
     public String username;
+    /**
+     * The {@link String} containing the user's email address.
+     */
     public String email;
+    /**
+     * The {@link String} used to determine whether the user is a TA or an RA.
+     */
     public String ta_ra;
+    /**
+     * The {@link String} containing the user's faculty advisor.
+     */
     public String advisor;
+    /**
+     * The {@link String} containing the user's account code.
+     */
     public String code;
+    /**
+     * True if user has signed for the week, otherwise false.
+     */
     public boolean signed;
 
 
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    }
+    /**
+     * Default constructor for {@link User} object.
+     */
+    public User() {}
 
+    /**
+     * Constructor for {@link User} object with parameters.
+     * @param username The {@link String} containing the user's name.
+     * @param email The {@link String} containing the user's email address.
+     */
     public User(String username, String email) {
         signed = false;
         this.username = username;
@@ -25,12 +45,25 @@ public class User extends Object{
     }
 
 
+    /**
+     * Constructor for {@link User} object with parameters.
+     * @param username The {@link String} containing the user's name.
+     * @param signed True if user has signed for the week, otherwise false.
+     */
     public User(String username, boolean signed) {
         this.signed = signed;
         this.username = username;
 
     }
 
+    /**
+     * Constructor for {@link User} object with parameters.
+     * @param username The {@link String} containing the user's name.
+     * @param email The {@link String} containing the user's email address.
+     * @param ta_ra The {@link String} used to determine whether the user is a TA or an RA.
+     * @param advisor The {@link String} containing the user's account code.
+     * @param code The {@link String} containing the user's account code.
+     */
     public User(String username, String email, String ta_ra, String advisor, String code) {
         this.username = username;
         this.email = email;
@@ -39,6 +72,15 @@ public class User extends Object{
         this.code = code;
     }
 
+    /**
+     * Constructor for {@link User} object with parameters.
+     * @param username The {@link String} containing the user's name.
+     * @param email The {@link String} containing the user's email address.
+     * @param ta_ra The {@link String} used to determine whether the user is a TA or an RA.
+     * @param advisor The {@link String} containing the user's account code.
+     * @param code The {@link String} containing the user's account code.
+     * @param signed True if user has signed for the week, otherwise false.
+     */
     public User(String username, String email, String ta_ra, String advisor, String code, boolean signed) {
         this.username = username;
         this.email = email;
