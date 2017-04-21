@@ -6,7 +6,7 @@
 
     <application xmlns:tools="http://schemas.android.com/tools"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/river_hawk"
         android:label="@string/app_title"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"

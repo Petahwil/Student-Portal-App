@@ -16,8 +16,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Current List of TA/RA's"
-        android:textSize="20sp"
+        android:text="Current TA/RA's"
+        android:textSize="@dimen/text_size"
         android:padding="10dp"
         android:textStyle="bold|italic"/>
 

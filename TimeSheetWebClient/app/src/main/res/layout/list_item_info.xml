@@ -9,19 +9,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textSize="20sp"
+        android:textSize="@dimen/sub_text_size"
         android:textStyle="bold"
-        android:paddingBottom="5dp"
+        android:paddingBottom="3dp"
         android:padding="5dp"
         android:id="@+id/name_view"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textSize="16sp"
+        android:textSize="@dimen/sub_text_size"
         android:textStyle="italic"
         android:padding="5dp"
-        android:paddingTop="5dp"
+        android:paddingTop="3dp"
         android:id="@+id/email_view"/>
 
 </LinearLayout>

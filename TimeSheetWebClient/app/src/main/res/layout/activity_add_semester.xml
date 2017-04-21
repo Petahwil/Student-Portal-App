@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="25dp">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -85,6 +85,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/semester_start"
                         android:textSize="@dimen/text_size"
                         android:textStyle="bold"/>
@@ -124,7 +125,7 @@
 
             <Button
                 android:id="@+id/edit_semester_button"
-                android:layout_width="wrap_content"
+                android:layout_width="500dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="@dimen/sub_text_size"
@@ -133,7 +134,8 @@
 
             <Button
                 android:id="@+id/new_semester_button"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/add_semester_width"
+                android:layout_gravity="center"
                 android:textSize="@dimen/sub_text_size"
                 android:layout_height="wrap_content"
                 android:text="@string/create_new_semester" />
@@ -157,7 +159,7 @@
 
             <EditText
                 android:id="@+id/email_change"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/add_semester_width"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_admin_email"
                 android:inputType="textEmailAddress"
@@ -166,7 +168,7 @@
 
             <Button
                 android:id="@+id/email_button"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/add_semester_width"
                 android:layout_height="wrap_content"
                 android:text="@string/update_admin_email"
                 android:textSize="@dimen/sub_text_size" />
