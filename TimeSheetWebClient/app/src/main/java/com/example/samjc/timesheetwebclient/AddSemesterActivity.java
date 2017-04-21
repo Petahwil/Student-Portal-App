@@ -62,30 +62,12 @@ public class AddSemesterActivity extends AppCompatActivity{
     TextView numWeeksText;
     TextView currentEmailText;
 
-    /**
-     * The {@link EditText} for the start date month.
-     */
-    EditText startDateEditMonth;
-    /**
-     * The {@link EditText} for the start date day.
-     */
-    EditText startDateEditDay;
-    /**
-     * The {@link EditText} for the start date year.
-     */
-    EditText startDateEditYear;
-    /**
-     * The {@link EditText} for the end date month.
-     */
-    EditText endDateEditMonth;
-    /**
-     * The {@link EditText} for the end date day.
-     */
-    EditText endDateEditDay;
-    /**
-     * The {@link EditText} for the end date year.
-     */
-    EditText endDateEditYear;
+
+    DatePicker startDatePicker;
+
+    DatePicker endDatePicker;
+
+
 
     /**
      * The {@link Button} to change current semester's date.
@@ -126,12 +108,8 @@ public class AddSemesterActivity extends AppCompatActivity{
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
 
         // Set up UI elements.
-        startDateEditMonth = (EditText) findViewById(R.id.start_date_month_edit);
-        startDateEditDay = (EditText) findViewById(R.id.start_date_day_edit);
-        startDateEditYear = (EditText) findViewById(R.id.start_date_year_edit);
-        endDateEditMonth = (EditText) findViewById(R.id.end_date_month_edit);
-        endDateEditDay = (EditText) findViewById(R.id.end_date_day_edit);
-        endDateEditYear = (EditText) findViewById(R.id.end_date_year_edit);
+        startDatePicker = (DatePicker)findViewById(R.id.StartDatePicker);
+        endDatePicker = (DatePicker)findViewById(R.id.EndDatePicker);
 
         emailEdit = (EditText) findViewById(R.id.email_change);
         emailChange = (Button) findViewById(R.id.email_button);
@@ -268,90 +246,16 @@ public class AddSemesterActivity extends AppCompatActivity{
      * Change dates of current semester.
      */
     private void changeSemesterDates() {
-        int startMonth = Integer.parseInt(startDateEditMonth.getText().toString());
-        int startDay = Integer.parseInt(startDateEditDay.getText().toString());
-        int startYear = Integer.parseInt(startDateEditYear.getText().toString());
-        int endMonth = Integer.parseInt(endDateEditMonth.getText().toString());
-        int endDay = Integer.parseInt(endDateEditDay.getText().toString());
-        int endYear = Integer.parseInt(endDateEditYear.getText().toString());
 
-        switch (startMonth) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if (startDay < 1 || startDay > 31) {
-                    startDate = "ERROR";
-                } else {
-                    startDate = startMonth + "/" + startDay + "/" + startYear;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if (startDay < 1 || startDay > 30) {
-                    startDate = "ERROR";
-                } else {
-                    startDate = startMonth + "/" + startDay + "/" + startYear;
-                }
-                break;
-            case 2:
-                if (startDay < 1 || startDay > 29) {
-                    startDate = "ERROR";
-                } else {
-                    startDate = startMonth + "/" + startDay + "/" + startYear;
-                }
-                break;
-            default:
-                startDate = "ERROR";
-                break;
-        }
-        switch (endMonth) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if (endDay < 1 || endDay > 31) {
-                    endDate = "ERROR";
-                } else {
-                    endDate = endMonth + "/" + endDay + "/" + endYear;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if (endDay < 1 || endDay > 30) {
-                    endDate = "ERROR";
-                } else {
-                    endDate = endMonth + "/" + endDay + "/" + endYear;
-                }
-                break;
-            case 2:
-                if (endDay < 1 || endDay > 29) {
-                    endDate = "ERROR";
-                } else {
-                    endDate = endMonth + "/" + endDay + "/" + endYear;
-                }
-                break;
-            default:
-                endDate = "ERROR";
-                break;
-        }
+        startDate = Integer.toString(startDatePicker.getMonth())+ "/" + Integer.toString(startDatePicker.getDayOfMonth()) + "/" + Integer.toString(startDatePicker.getYear());
+        endDate = Integer.toString(endDatePicker.getMonth())+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
 
         if (startDate.equals("ERROR") || endDate.equals("ERROR")) {
             Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
         } else {
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
             try {
                 start.setTime(sdf.parse(startDate));
                 end.setTime(sdf.parse(endDate));
@@ -392,83 +296,8 @@ public class AddSemesterActivity extends AppCompatActivity{
             data.setActive("Fall");
         }
 
-        int startMonth = Integer.parseInt(startDateEditMonth.getText().toString());
-        int startDay = Integer.parseInt(startDateEditDay.getText().toString());
-        int startYear = Integer.parseInt(startDateEditYear.getText().toString());
-        int endMonth = Integer.parseInt(endDateEditMonth.getText().toString());
-        int endDay = Integer.parseInt(endDateEditDay.getText().toString());
-        int endYear = Integer.parseInt(endDateEditYear.getText().toString());
-
-        switch(startMonth) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if (startDay < 1 || startDay > 31) {
-                    startDate = "ERROR";
-                } else {
-                    startDate = startMonth + "/" + startDay + "/" + startYear;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if (startDay < 1 || startDay > 30) {
-                    startDate = "ERROR";
-                } else {
-                    startDate = startMonth + "/" + startDay + "/" + startYear;
-                }
-                break;
-            case 2:
-                if (startDay < 1 || startDay > 29) {
-                    startDate = "ERROR";
-                } else {
-                    startDate = startMonth + "/" + startDay + "/" + startYear;
-                }
-                break;
-            default:
-                startDate = "ERROR";
-                break;
-        }
-        switch(endMonth) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if (endDay < 1 || endDay > 31) {
-                    endDate = "ERROR";
-                } else {
-                    endDate = endMonth + "/" + endDay + "/" + endYear;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if (endDay < 1 || endDay > 30) {
-                    endDate = "ERROR";
-                } else {
-                    endDate = endMonth + "/" + endDay + "/" + endYear;
-                }
-                break;
-            case 2:
-                if (endDay < 1 || endDay > 29) {
-                    endDate = "ERROR";
-                } else {
-                    endDate = endMonth + "/" + endDay + "/" + endYear;
-                }
-                break;
-            default:
-                endDate = "ERROR";
-                break;
-        }
+        startDate = Integer.toString(startDatePicker.getMonth())+ "/" + Integer.toString(startDatePicker.getDayOfMonth()) + "/" + Integer.toString(startDatePicker.getYear());
+        endDate = Integer.toString(endDatePicker.getMonth())+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
 
         if (startDate.equals("ERROR") || endDate.equals("ERROR")) {
             Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();

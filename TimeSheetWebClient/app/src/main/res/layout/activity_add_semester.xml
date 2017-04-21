@@ -20,67 +20,67 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/current_semester_details"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:textSize="@dimen/sub_text_size"
+                android:id="@+id/start_date"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:textSize="@dimen/sub_text_size"
+                android:id="@+id/end_date"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:textSize="@dimen/sub_text_size"
+                android:id="@+id/num_weeks"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="italic"
+                android:textSize="@dimen/sub_text_size"
+                android:id="@+id/curr_email"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/current_semester_details"
-                    android:textSize="@dimen/text_size"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="italic"
-                    android:textSize="@dimen/sub_text_size"
-                    android:id="@+id/start_date"/>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="italic"
-                    android:textSize="@dimen/sub_text_size"
-                    android:id="@+id/end_date"/>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="italic"
-                    android:textSize="@dimen/sub_text_size"
-                    android:id="@+id/num_weeks"/>
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textStyle="italic"
-                    android:textSize="@dimen/sub_text_size"
-                    android:id="@+id/curr_email"/>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="25dp">
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -89,40 +89,19 @@
                         android:textSize="@dimen/text_size"
                         android:textStyle="bold"/>
 
-                    <EditText
+                    <DatePicker
+                        android:id="@+id/StartDatePicker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="MM"
-                        android:id="@+id/start_date_month_edit"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="/"/>
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="DD"
-                        android:id="@+id/start_date_day_edit"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="/" />
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="YY"
-                        android:id="@+id/start_date_year_edit"/>
+                        android:datePickerMode="spinner"
+                        android:spinnersShown="false"/>
 
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView"
@@ -132,65 +111,45 @@
                         android:textSize="@dimen/text_size"
                         android:textStyle="bold" />
 
-                    <EditText
+                    <DatePicker
+                        android:id="@+id/EndDatePicker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="MM"
-                        android:id="@+id/end_date_month_edit"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="/"/>
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="DD"
-                        android:id="@+id/end_date_day_edit"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="/" />
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="YY"
-                        android:id="@+id/end_date_year_edit"/>
-
+                        android:datePickerMode="spinner"
+                        android:spinnersShown="false"/>
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/edit_semester_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="@dimen/sub_text_size"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/change_current_semester_dates" />
-
-                <Button
-                    android:id="@+id/new_semester_button"
-                    android:layout_width="match_parent"
-                    android:textSize="@dimen/sub_text_size"
-                    android:layout_height="wrap_content"
-                    android:text="@string/create_new_semester" />
-
             </LinearLayout>
+
+            <Button
+                android:id="@+id/edit_semester_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/sub_text_size"
+                android:layout_marginTop="20dp"
+                android:text="@string/change_current_semester_dates" />
+
+            <Button
+                android:id="@+id/new_semester_button"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/sub_text_size"
+                android:layout_height="wrap_content"
+                android:text="@string/create_new_semester" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/update_admin_email"
                 android:textSize="@dimen/text_size"
@@ -201,16 +160,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_admin_email"
-                android:textSize="@dimen/sub_text_size"
                 android:inputType="textEmailAddress"
+                android:textSize="@dimen/sub_text_size"
                 android:visibility="visible" />
 
             <Button
                 android:id="@+id/email_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sub_text_size"
-                android:text="@string/update_admin_email" />
+                android:text="@string/update_admin_email"
+                android:textSize="@dimen/sub_text_size" />
+
 
         </LinearLayout>
 
