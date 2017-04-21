@@ -164,8 +164,9 @@
 
                 <Button
                     android:id="@+id/edit_semester_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:textSize="@dimen/sub_text_size"
                     android:layout_marginTop="20dp"
                     android:text="@string/change_current_semester_dates" />
@@ -197,7 +198,7 @@
 
             <EditText
                 android:id="@+id/email_change"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_admin_email"
                 android:textSize="@dimen/sub_text_size"
@@ -206,7 +207,7 @@
 
             <Button
                 android:id="@+id/email_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sub_text_size"
                 android:text="@string/update_admin_email" />

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -174,9 +175,7 @@ public class AddSemesterActivity extends AppCompatActivity{
                     data.setEmail(emailEdit.getText().toString());
 
                     mEmployeeDatabaseReference.child("Data").setValue(data);
-
-                    emailEdit.setText("");
-                    emailEdit.setHint("Enter Email - Current Email: "+data.getEmail());
+                    currentEmailText.setText("Admin Email: " + data.getEmail());
                 }
             }
         });

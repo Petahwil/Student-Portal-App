@@ -378,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
                 .addRecipient(new Recipient(AdminEmail))
                 .setSubject("Weekly Signatures")
                 .setText("Attached is the Excel spreadsheet with user sign-in records.")
-                .addAttachment(new Attachment(file.toString(), "Filename.csv"))
+                .addAttachment(new Attachment(file.toString(), "Semester.csv"))
                 .build();
         mailSender.sendMail(mail);
 
