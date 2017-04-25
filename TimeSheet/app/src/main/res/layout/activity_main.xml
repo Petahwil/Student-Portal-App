@@ -78,7 +78,8 @@
             android:minHeight="25dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:completionThreshold="1"/>
 
         <Button
             android:id="@+id/nextButton"

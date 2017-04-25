@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final User user = (User) lvMain.getItemAtPosition(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Delete user \"" + user.username + "\" from database?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setTitle("What would you like to do with user \"" + user.username + "\" ?");
+                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Delete user from database.
@@ -166,10 +166,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing.
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Edit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent iii = new Intent(MainActivity.this, EditUserActivity.class);
+                        iii.putExtra("editusername", user.username.toString());
+                        startActivity(iii);
                         dialog.dismiss();
                     }
                 });

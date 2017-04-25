@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
                 tinydb.putObject("data", data);
 
+                adapter.notifyDataSetChanged();
+
 
             }
             public void onCancelled(DatabaseError databaseError) {
