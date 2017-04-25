@@ -60,14 +60,19 @@ public class AddSemesterActivity extends AppCompatActivity{
      * The {@link TextView} showing the number of weeks in the current semester.
      */
     TextView numWeeksText;
+    /**
+     * The {@link TextView} showing the current admin email address.
+     */
     TextView currentEmailText;
 
-
+    /**
+     * The {@link DatePicker} used to pick the semester's start date.
+     */
     DatePicker startDatePicker;
-
+    /**
+     * The {@link DatePicker} used to pick the semester's end date.
+     */
     DatePicker endDatePicker;
-
-
 
     /**
      * The {@link Button} to change current semester's date.
@@ -108,8 +113,8 @@ public class AddSemesterActivity extends AppCompatActivity{
         mEmployeeDatabaseReference = mFirebaseDatabase.getReference();
 
         // Set up UI elements.
-        startDatePicker = (DatePicker)findViewById(R.id.StartDatePicker);
-        endDatePicker = (DatePicker)findViewById(R.id.EndDatePicker);
+        startDatePicker = (DatePicker) findViewById(R.id.StartDatePicker);
+        endDatePicker = (DatePicker) findViewById(R.id.EndDatePicker);
 
         emailEdit = (EditText) findViewById(R.id.email_change);
         emailChange = (Button) findViewById(R.id.email_button);
@@ -153,7 +158,8 @@ public class AddSemesterActivity extends AppCompatActivity{
                     data.setEmail(emailEdit.getText().toString());
 
                     mEmployeeDatabaseReference.child("Data").setValue(data);
-                    currentEmailText.setText("Admin Email: " + data.getEmail());
+                    String cEmail = "Admin Email: " + data.getEmail();
+                    currentEmailText.setText(cEmail);
                 }
             }
         });
