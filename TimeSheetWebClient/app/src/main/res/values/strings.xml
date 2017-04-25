@@ -11,8 +11,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="current_semester_details">Current Semester Details</string>
-    <string name="semester_start">Semester Start:</string>
-    <string name="semester_end">Semester End:</string>
+    <string name="semester_start">Semester Start</string>
+    <string name="semester_end">Semester End</string>
     <string name="change_current_semester_dates">Change Current Semester Dates</string>
     <string name="create_new_semester">Create New Semester</string>
     <string name="update_admin_email">Update Admin Email</string>

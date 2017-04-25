@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_semester"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -74,39 +73,45 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:text="@string/semester_start"
                         android:textSize="@dimen/text_size"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <DatePicker
                         android:id="@+id/StartDatePicker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:datePickerMode="spinner"
-                        android:spinnersShown="false"/>
+                        android:headerBackground="@color/colorPrimary"
+                        android:spinnersShown="false" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:text="@string/semester_end"
                         android:textSize="@dimen/text_size"
                         android:textStyle="bold" />
@@ -115,8 +120,10 @@
                         android:id="@+id/EndDatePicker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:datePickerMode="spinner"
-                        android:spinnersShown="false"/>
+                        android:headerBackground="@color/colorPrimary"
+                        android:spinnersShown="false" />
 
                 </LinearLayout>
 
@@ -133,10 +140,13 @@
 
             <Button
                 android:id="@+id/new_semester_button"
-                android:layout_width="match_parent"
-                android:textSize="@dimen/sub_text_size"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/create_new_semester" />
+                android:layout_gravity="center_horizontal"
+                android:paddingLeft="85dp"
+                android:paddingRight="85dp"
+                android:text="@string/create_new_semester"
+                android:textSize="@dimen/sub_text_size" />
 
         </LinearLayout>
 
@@ -176,4 +186,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</RelativeLayout>
