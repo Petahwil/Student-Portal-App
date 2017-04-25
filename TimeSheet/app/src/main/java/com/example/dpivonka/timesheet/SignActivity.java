@@ -28,6 +28,7 @@ public class SignActivity extends AppCompatActivity {
     private Button mSendButton;
     private Button mClearButton;
     private SignaturePad mSignaturePad;
+    private Boolean checkSigned = false;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mEmployeeDatabaseReference;
@@ -61,7 +62,9 @@ public class SignActivity extends AppCompatActivity {
         //signature
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
-            public void onStartSigning() {}
+            public void onStartSigning() {
+                checkSigned = true;
+            }
 
             @Override
             public void onSigned() {
@@ -70,8 +73,10 @@ public class SignActivity extends AppCompatActivity {
                 mSendButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        if (checkSigned == true) {
                         //check what week it is and update if nessasary
+
+
                         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
                         Date endDate = null;
                         try {
@@ -117,16 +122,20 @@ public class SignActivity extends AppCompatActivity {
                         mEmployeeDatabaseReference.child("Data").setValue(data);
 
                         //return to main activity
-                        Intent intent = new Intent(SignActivity.this, MainActivity.class);
-                        Toast.makeText(getApplicationContext(), "Signature has been submitted.", Toast.LENGTH_LONG).show();
-                        startActivity(intent);
+                            Intent intent = new Intent(SignActivity.this, MainActivity.class);
+                            Toast.makeText(getApplicationContext(), "Signature has been submitted.", Toast.LENGTH_LONG).show();
+                            startActivity(intent);
+                        }
                     }
                 });
 
 
             }
             @Override
-            public void onClear() {}
+            public void onClear() {
+                checkSigned = false;
+                System.out.println(checkSigned.booleanValue());
+            }
 
         });
 
