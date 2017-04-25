@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Sign \'n\' Go Admin</string>
+    <string name="app_name">Sign \'n Go Admin</string>
     <string name="add_user">Add User</string>
     <string name="add_semester">Add Semester</string>
     <string name="name">Name:</string>
     <string name="email_address">Email Address:</string>
     <string name="save">Save</string>
     <string name="send_email">Send Email</string>
-    <string name="app_title">Sign \'n\' Go - Admin</string>
+    <string name="app_title">Sign \'n Go - Admin</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="current_semester_details">Current Semester Details</string>
     <string name="semester_start">Semester Start Date</string>

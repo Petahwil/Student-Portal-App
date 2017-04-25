@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sign \'n\' Go</string>
+    <string name="app_name">Sign \'n Go</string>
     <string name="signature_inst">Please sign your name in the signature box below.</string>
     <string name="welcome">Welcome, please begin by typing your name in the text box below.</string>
 </resources>
