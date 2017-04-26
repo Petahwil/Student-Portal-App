@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -153,7 +154,13 @@ public class AddSemesterActivity extends AppCompatActivity{
             public void onClick(View v) {
                 String email = emailEdit.getText().toString();
                 if ((TextUtils.isEmpty(email)) || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(getApplicationContext(), "Invalid or empty \"Email Address\" field.", Toast.LENGTH_LONG).show();
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Invalid or empty \"Email Address\" field.", Toast.LENGTH_LONG);
+                    LinearLayout toastLayout = (LinearLayout) toast.getView();
+                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                    toastTV.setTextSize(30);
+                    toast.show();
+
                 } else {
                     data.setEmail(emailEdit.getText().toString());
 
@@ -217,11 +224,14 @@ public class AddSemesterActivity extends AppCompatActivity{
 
                             if(now.before(start)){
                                 changeSemesterDates();
-                            } else {
-                                Toast.makeText(getApplicationContext(),
-                                        "The semester you are trying to modify has already started." +
-                                                "Please create a new semester.",
-                                        Toast.LENGTH_LONG).show();
+                            } else {;
+                                Toast toast = Toast.makeText(getApplicationContext(), "The semester you are trying to modify has already started." +
+                                        "Please create a new semester.", Toast.LENGTH_LONG);
+                                LinearLayout toastLayout = (LinearLayout) toast.getView();
+                                TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                                toastTV.setTextSize(30);
+                                toast.show();
+
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -257,7 +267,11 @@ public class AddSemesterActivity extends AppCompatActivity{
         endDate = Integer.toString(endDatePicker.getMonth())+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
 
         if (startDate.equals("ERROR") || endDate.equals("ERROR")) {
-            Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG);
+            LinearLayout toastLayout = (LinearLayout) toast.getView();
+            TextView toastTV = (TextView) toastLayout.getChildAt(0);
+            toastTV.setTextSize(30);
+            toast.show();
         } else {
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
@@ -266,7 +280,11 @@ public class AddSemesterActivity extends AppCompatActivity{
                 start.setTime(sdf.parse(startDate));
                 end.setTime(sdf.parse(endDate));
             } catch (ParseException e) {
-                Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
+                Toast toast = Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG);
+                LinearLayout toastLayout = (LinearLayout) toast.getView();
+                TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                toastTV.setTextSize(30);
+                toast.show();
                 e.printStackTrace();
             }
 
@@ -306,7 +324,11 @@ public class AddSemesterActivity extends AppCompatActivity{
         endDate = Integer.toString(endDatePicker.getMonth())+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
 
         if (startDate.equals("ERROR") || endDate.equals("ERROR")) {
-            Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG);
+            LinearLayout toastLayout = (LinearLayout) toast.getView();
+            TextView toastTV = (TextView) toastLayout.getChildAt(0);
+            toastTV.setTextSize(30);
+            toast.show();
         } else {
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
@@ -315,7 +337,11 @@ public class AddSemesterActivity extends AppCompatActivity{
                 start.setTime(sdf.parse(startDate));
                 end.setTime(sdf.parse(endDate));
             } catch (ParseException e) {
-                Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG).show();
+                Toast toast = Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG);
+                LinearLayout toastLayout = (LinearLayout) toast.getView();
+                TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                toastTV.setTextSize(30);
+                toast.show();
                 e.printStackTrace();
             }
 

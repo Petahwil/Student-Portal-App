@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import android.os.Handler;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -100,7 +103,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //weekly email system activation
-        EmailSystem.SetAlarm(getApplicationContext());
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // wait 10 secs to let data get pulled from firebase
+                EmailSystem.SetAlarm(getApplicationContext());
+            }
+        }, 10000);
+
 
         //set up images
         rh2 = (ImageView) findViewById(R.id.uml_rh2);
@@ -123,6 +133,22 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         Toast.makeText(getApplicationContext(), "Invalid Name. Use Autocomplete.", Toast.LENGTH_SHORT).show();
                     }
+            }
+        });
+
+        actv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId== EditorInfo.IME_ACTION_DONE) {
+                    if(userNames.contains(mNameEditText.getText().toString())){
+                        Intent ii = new Intent(MainActivity.this, WeekActivity.class);
+                        ii.putExtra("userName", mNameEditText.getText().toString());
+                        startActivity(ii);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Invalid Name. Use Autocomplete.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return true;
             }
         });
     }

@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -138,24 +140,48 @@ public class EditUserActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(name)) {
                     //if name field is empty make Toast to inform user.
-                    Toast.makeText(getApplicationContext(), "Empty \"Name\" field.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Empty \"Name\" field.", Toast.LENGTH_LONG);
+                    LinearLayout toastLayout = (LinearLayout) toast.getView();
+                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                    toastTV.setTextSize(30);
+                    toast.show();
                 } else if ((TextUtils.isEmpty(email)) ||
                         !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     //else if email is invalid or empty make Toast to inform user.
-                    Toast.makeText(getApplicationContext(), "Invalid or empty \"Email Address\" field.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Invalid or empty \"Email Address\" field.", Toast.LENGTH_LONG);
+                    LinearLayout toastLayout = (LinearLayout) toast.getView();
+                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                    toastTV.setTextSize(30);
+                    toast.show();
                 } else if (TextUtils.isEmpty(position)) {
                     //else if no position is selected make Toast to inform user.
-                    Toast.makeText(getApplicationContext(), "No \"Position\" selected.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "No \"Position\" selected.", Toast.LENGTH_LONG);
+                    LinearLayout toastLayout = (LinearLayout) toast.getView();
+                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                    toastTV.setTextSize(30);
+                    toast.show();
                 } else if (TextUtils.isEmpty(faculty)) {
-                    //else if faculty field is empty make Toast to inform user.
-                    Toast.makeText(getApplicationContext(), "Empty \"Faculty Advisor\" field.", Toast.LENGTH_LONG).show();
+                    //else if faculty field is empty make Toast to inform user.\
+                    Toast toast = Toast.makeText(getApplicationContext(), "Empty \"Faculty Advisor\" field.", Toast.LENGTH_LONG);
+                    LinearLayout toastLayout = (LinearLayout) toast.getView();
+                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                    toastTV.setTextSize(30);
+                    toast.show();
                 } else if (TextUtils.isEmpty(account)) {
                     //else if account field is empty make Toast to inform user.
-                    Toast.makeText(getApplicationContext(), "Empty \"HR Account\" field.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Empty \"HR Account\" field.", Toast.LENGTH_LONG);
+                    LinearLayout toastLayout = (LinearLayout) toast.getView();
+                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                    toastTV.setTextSize(30);
+                    toast.show();
                 } else {
                     //else add user to database and go back to MainActivity.
                     writeNewUser(name, email, position, faculty, account);
-                    Toast.makeText(getApplicationContext(), "User \"" + name + "\" added to database.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(getApplicationContext(), "User \"" + name + "\" added to database.", Toast.LENGTH_LONG);
+                    LinearLayout toastLayout = (LinearLayout) toast.getView();
+                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                    toastTV.setTextSize(30);
+                    toast.show();
                     startActivity(new Intent(EditUserActivity.this, MainActivity.class));
                 }
                 return true;

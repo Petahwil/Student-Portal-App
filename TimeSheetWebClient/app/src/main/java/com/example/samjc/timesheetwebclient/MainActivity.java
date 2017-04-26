@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -161,7 +163,12 @@ public class MainActivity extends AppCompatActivity {
                         // Reset adapter and apply to lvMain to update list.
                         adapter.notifyDataSetChanged();
 
-                        Toast.makeText(getApplicationContext(), "User \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG).show();
+                        Toast toast = Toast.makeText(getApplicationContext(), "User \"" + user.username + "\" deleted from database.", Toast.LENGTH_LONG);
+                        LinearLayout toastLayout = (LinearLayout) toast.getView();
+                        TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                        toastTV.setTextSize(30);
+                        toast.show();
+
                         dialog.dismiss();
                     }
                 });
@@ -391,8 +398,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         mailSender.sendMail(mail);
 
-        Toast.makeText(getApplicationContext(),
-                "Email Sent", Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(getApplicationContext(), "Email Sent", Toast.LENGTH_SHORT);
+        LinearLayout toastLayout = (LinearLayout) toast.getView();
+        TextView toastTV = (TextView) toastLayout.getChildAt(0);
+        toastTV.setTextSize(30);
+        toast.show();
     }
     //endregion
 

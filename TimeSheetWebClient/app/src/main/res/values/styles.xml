@@ -6,6 +6,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarSize">100dp</item>
+        <item name="actionButtonStyle">@style/myActionButtonStyle</item>
+    </style>
+
+    <style name="myActionButtonStyle" parent="Widget.AppCompat.ActionButton">
+        <item name="android:width">100dp</item>
+        <item name="android:height">100dp</item>
+        <item name="android:scaleX">2</item>
+        <item name="android:scaleY">2</item>
     </style>
 
 </resources>
