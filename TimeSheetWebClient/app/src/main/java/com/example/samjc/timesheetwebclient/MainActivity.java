@@ -2,6 +2,7 @@ package com.example.samjc.timesheetwebclient;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
      * The {@link TinyDB} holding a reference to Firebase.
      */
     private TinyDB tinydb;
+
+    boolean timeoutover=false;
     //endregion
 
     @Override
@@ -132,6 +135,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //start timeout
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // wait 5 secs prevent double clicks
+                timeoutover = true;
+            }
+        }, 1000);
+
+        //init views
         lvMain = (ListView) findViewById(R.id.lv_main);
         adapter = new UserAdapter(this, userList);
         lvMain.setAdapter(adapter);
@@ -207,7 +221,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_user:
-                startActivity(new Intent(this, AddUserActivity.class));
+                if(timeoutover){
+                    startActivity(new Intent(this, AddUserActivity.class));
+                }
                 return true;
             case R.id.action_email:
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
