@@ -28,7 +28,9 @@
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden">
         </activity>
-        <activity android:name=".EditUserActivity" />
+        <activity
+            android:parentActivityName=".MainActivity"
+            android:name=".EditUserActivity" />
     </application>
 
 </manifest>

@@ -115,7 +115,9 @@ public class AddSemesterActivity extends AppCompatActivity{
 
         // Set up UI elements.
         startDatePicker = (DatePicker) findViewById(R.id.StartDatePicker);
+        startDatePicker.setMinDate(System.currentTimeMillis() - 1000);
         endDatePicker = (DatePicker) findViewById(R.id.EndDatePicker);
+        endDatePicker.setMinDate(System.currentTimeMillis() - 1000);
 
         emailEdit = (EditText) findViewById(R.id.email_change);
         emailChange = (Button) findViewById(R.id.email_button);
@@ -175,6 +177,7 @@ public class AddSemesterActivity extends AppCompatActivity{
         newSemesterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddSemesterActivity.this);
                 builder.setTitle("Create new semester?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -214,7 +217,6 @@ public class AddSemesterActivity extends AppCompatActivity{
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         Calendar now = Calendar.getInstance();
                         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
                         Date start;

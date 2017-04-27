@@ -13,6 +13,7 @@
     <style name="myActionButtonStyle" parent="Widget.AppCompat.ActionButton">
         <item name="android:width">100dp</item>
         <item name="android:height">100dp</item>
+        <item name="android:layout_margin">10dp</item>
         <item name="android:scaleX">2</item>
         <item name="android:scaleY">2</item>
     </style>
