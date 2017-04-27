@@ -190,7 +190,6 @@ public class AddSemesterActivity extends AppCompatActivity{
                         endDateText.setText(eDate);
                         numWeeksText.setText(nWeeks);
 
-                        startActivity(new Intent(AddSemesterActivity.this, MainActivity.class));
                     }
                 });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -215,23 +214,25 @@ public class AddSemesterActivity extends AppCompatActivity{
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //check if semester has started
+
                         Calendar now = Calendar.getInstance();
+                        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
                         Date start;
-                        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
+                        Calendar blah = Calendar.getInstance();
+
                         try {
                             start = sdf.parse(data.ActiveSemester().getStartdate());
+                            blah.setTime(start);
 
-                            if(now.before(start)){
+                            if(now.before(blah)){
                                 changeSemesterDates();
-                            } else {;
+                            } else {
                                 Toast toast = Toast.makeText(getApplicationContext(), "The semester you are trying to modify has already started." +
-                                        "Please create a new semester.", Toast.LENGTH_LONG);
+                                        " Please create a new semester.", Toast.LENGTH_LONG);
                                 LinearLayout toastLayout = (LinearLayout) toast.getView();
                                 TextView toastTV = (TextView) toastLayout.getChildAt(0);
                                 toastTV.setTextSize(30);
                                 toast.show();
-
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
