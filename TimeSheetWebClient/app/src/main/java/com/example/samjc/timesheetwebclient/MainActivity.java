@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                // wait 5 secs prevent double clicks
+                // wait 1 secs prevent double clicks
                 timeoutover = true;
             }
         }, 1000);

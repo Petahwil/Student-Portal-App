@@ -263,8 +263,8 @@ public class AddSemesterActivity extends AppCompatActivity{
      */
     private void changeSemesterDates() {
 
-        startDate = Integer.toString(startDatePicker.getMonth())+ "/" + Integer.toString(startDatePicker.getDayOfMonth()) + "/" + Integer.toString(startDatePicker.getYear());
-        endDate = Integer.toString(endDatePicker.getMonth())+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
+        startDate = Integer.toString(startDatePicker.getMonth()+1)+ "/" + Integer.toString(startDatePicker.getDayOfMonth()) + "/" + Integer.toString(startDatePicker.getYear());
+        endDate = Integer.toString(endDatePicker.getMonth()+1)+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
 
         if (startDate.equals("ERROR") || endDate.equals("ERROR")) {
             Toast toast = Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG);
@@ -320,8 +320,8 @@ public class AddSemesterActivity extends AppCompatActivity{
             data.setActive("Fall");
         }
 
-        startDate = Integer.toString(startDatePicker.getMonth())+ "/" + Integer.toString(startDatePicker.getDayOfMonth()) + "/" + Integer.toString(startDatePicker.getYear());
-        endDate = Integer.toString(endDatePicker.getMonth())+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
+        startDate = Integer.toString(startDatePicker.getMonth()+1)+ "/" + Integer.toString(startDatePicker.getDayOfMonth()) + "/" + Integer.toString(startDatePicker.getYear());
+        endDate = Integer.toString(endDatePicker.getMonth()+1)+ "/" + Integer.toString(endDatePicker.getDayOfMonth()) + "/" + Integer.toString(endDatePicker.getYear());
 
         if (startDate.equals("ERROR") || endDate.equals("ERROR")) {
             Toast toast = Toast.makeText(getApplicationContext(), "Invalid date.", Toast.LENGTH_LONG);
