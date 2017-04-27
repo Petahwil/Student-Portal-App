@@ -66,21 +66,23 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:weightSum="2"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <TextView
@@ -91,31 +93,15 @@
                         android:textSize="@dimen/text_size"
                         android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
                         <DatePicker
                             android:id="@+id/StartDatePicker"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal|center_vertical"
                             android:datePickerMode="spinner"
                             android:headerBackground="@color/colorPrimary"
-                            android:paddingLeft="100dp"
-                            android:spinnersShown="false" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="-40dp"
-                            android:layout_marginTop="40dp"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/scroll_bar"
-                            android:scaleX=".2" />
-
-                    </LinearLayout>
+                            android:spinnersShown="true"
+                            android:calendarViewShown="false"/>
 
                 </LinearLayout>
 
@@ -123,6 +109,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <TextView
@@ -133,10 +120,6 @@
                         android:text="@string/semester_end"
                         android:textSize="@dimen/text_size"
                         android:textStyle="bold" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
 
                         <DatePicker
                             android:id="@+id/EndDatePicker"
@@ -145,19 +128,8 @@
                             android:layout_gravity="center_horizontal"
                             android:datePickerMode="spinner"
                             android:headerBackground="@color/colorPrimary"
-                            android:paddingLeft="100dp"
-                            android:spinnersShown="false" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="-40dp"
-                            android:layout_marginTop="40dp"
-                            android:adjustViewBounds="true"
-                            android:background="@drawable/scroll_bar"
-                            android:scaleX=".2" />
-
-                    </LinearLayout>
+                            android:spinnersShown="true"
+                            android:calendarViewShown="false"/>
 
                 </LinearLayout>
 
