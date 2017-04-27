@@ -145,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 1000);
 
+
+
         //init views
         lvMain = (ListView) findViewById(R.id.lv_main);
         adapter = new UserAdapter(this, userList);
@@ -199,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent iii = new Intent(MainActivity.this, EditUserActivity.class);
                         iii.putExtra("editusername", user.username.toString());
+                        iii.putExtra("editemail", user.getEmail());
+                        iii.putExtra("editposition", user.getTa_ra());
+                        iii.putExtra("editadvisor", user.getAdvisor());
+                        iii.putExtra("editcode", user.getCode());
                         startActivity(iii);
                         dialog.dismiss();
                     }

@@ -32,6 +32,10 @@ public class EditUserActivity extends AppCompatActivity {
     Data data;
 
     String userName;
+    String email;
+    String position;
+    String faculty;
+    String code;
 
     EditText nameEdit;
     AutoCompleteTextView emailEdit;
@@ -91,11 +95,27 @@ public class EditUserActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         //get username
-        if (bundle != null)
+        if (bundle != null){
             userName = bundle.getString("editusername");
+            email = bundle.getString("editemail");
+            position = bundle.getString("editposition");
+            faculty = bundle.getString("editadvisor");
+            code = bundle.getString("editcode");
+        }
+
 
 
         nameEdit.setText(userName.toString());
+        emailEdit.setText(email);
+
+        if(position.equals("TA"))
+            positionGroup.check(R.id.radio_ta);
+        else if(position.equals("RA"))
+            positionGroup.check(R.id.radio_ra);
+
+
+        facultyEdit.setText(faculty);
+        accountEdit.setText(code);
 
         nameEdit.setOnClickListener(new View.OnClickListener() {
             @Override
