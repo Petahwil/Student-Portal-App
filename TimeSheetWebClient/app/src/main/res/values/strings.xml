@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Sign \'n Go Admin</string>
     <string name="add_user">Add User</string>
-    <string name="add_semester">Add Semester</string>
+    <string name="add_semester">Settings</string>
     <string name="name">Name:</string>
     <string name="email_address">Email Address:</string>
     <string name="save">Save</string>
