@@ -4,10 +4,11 @@ https://github.com/enrichman/androidmail Auto Email Libray Used
 
 https://github.com/kcochibili/TinyDB--Android-Shared-Preferences-Turbo Tiny Database
 
-Brianne - 
 
-Sam - Client UI improvements, client general code cleanup/documentation
+Desktop user guide - https://docs.google.com/document/d/1ghrrUevN9jDJ3Gnha9FPp0AuVlnZPuK8szAD-ayJ7Bk/edit?usp=sharing
 
-Dan - email system improvments, weekly reminder, force email sending thru client app
+Tablet user guide - https://docs.google.com/document/d/1qvBByk3u_d9H79bWuJ0OXWdGcLMs_KpadGFanuWSvoo/edit?usp=sharing
 
-Peter - 
+Presentation - https://docs.google.com/presentation/d/1Jn_fibK0r6cxx8JgFnhnGNgrx0m9lxOsqeSK9LAkI_4/edit?usp=sharing
+
+Report - https://docs.google.com/document/d/1dQf7x-_gRHftqMS7sg_ky-e4ACAHH9QZL_TswhgDf-c/edit?usp=sharing
