@@ -1,0 +1,36 @@
+Installation Instructions
+
+Tablet:
+
+1. Go to Settings then Lock screen and security. Set the Unknown sources
+slider is set to on.
+
+2. Download the apk from github "Sign 'n go.apk" on the device into your
+downloads folder. this can be done from the web browser.
+
+3. Install the app through the file explorer on your device. Go to your
+download folder in the file explorer app. Then file, click on "Sign 'n
+go.apk". You will now go through a install process.
+
+4. Sign 'n Go is now installed! you can move it to the home screen if you want
+to.
+
+
+Desktop:
+
+1. Google chrome must be installed on the Computer
+
+2. In Google chrome install Arc Welder from the Chrome web store
+https://chrome.google.com/webstore/detail/arc-welder/emfinbmielocnlhgmfkkmkngdoccbadn
+
+3.Launch arc welder
+
+4.Download the apk from github "Sign 'n go - Admin.apk" then Add in it Arc Welder
+
+5.Change orientation to portrait
+
+6.Click "test"
+
+7.The app has now been installed and can be found through search or in your
+list of application. It can be pinned to the task bar or a shortcut can be
+created.
